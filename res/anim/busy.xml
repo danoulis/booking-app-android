@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+
+    <item
+        android:drawable="@drawable/busy_01"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_02"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_03"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_04"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_05"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_06"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_07"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_08"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_09"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_10"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_11"
+        android:duration="75"/>
+    <item
+        android:drawable="@drawable/busy_12"
+        android:duration="75"/>
+
+</animation-list>

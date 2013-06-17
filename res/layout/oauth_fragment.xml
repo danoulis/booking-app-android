@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+	<!-- focusable is mandatory to avoid lack of soft keyboard on certain version of the platform -->
+	<!-- this is anroid bug #7189 -->
+    <WebView
+    	android:focusable="true"
+    	android:focusableInTouchMode="true"
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="fill_parent"
+        android:layout_height="6dp"
+        android:layout_weight="0"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
+        android:maxHeight="6dp"
+        android:minHeight="6dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_dark_drawable"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/button_cancel"
+        style="@style/ButtonCancel"
+        android:layout_width="match_parent"
+        android:layout_weight="0"
+        android:text="@string/oauth_button_cancel" />
+
+</LinearLayout>

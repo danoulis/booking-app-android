@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<style name="MapAddressDisplayBase">
+		<item name="android:ellipsize">end</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:lines">1</item>
+		<item name="android:maxLines">2</item>
+		<item name="android:clickable">true</item>
+		<item name="android:textSize">16dp</item>
+		<item name="android:minHeight">30dp</item>
+	</style>
+	<style name="MapAddressPickup" parent="@style/MapAddressDisplayBase">
+		<item name="android:textColor">@color/pickup_location</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+	<style name="MapAddressDropoff" parent="@style/MapAddressDisplayBase">
+		<item name="android:textColor">@color/dropoff_location</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+</resources>

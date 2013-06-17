@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/map_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <fragment
+                android:id="@+id/map_fragment"
+                android:name="com.tdispatch.passenger.fragment.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+
+                <RelativeLayout
+                    android:id="@+id/map_aim_point_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="196dp" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:id="@+id/button_set_as_pickup"
+                            android:layout_width="80dp"
+                            android:layout_height="110dp"
+                            android:clickable="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/map_aim_point_pickup_drawable" />
+
+                        <ImageView
+                            android:id="@+id/button_set_as_dropoff"
+                            android:layout_width="80dp"
+                            android:layout_height="110dp"
+                            android:clickable="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/map_aim_point_dropoff_drawable" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/map_aim_point_busy_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="110dp"
+                                android:clickable="true"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/map_aim_point_pickup_disabled" />
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="110dp"
+                                android:clickable="true"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/map_aim_point_dropoff_disabled" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/map_aim_point_busy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="25dp"
+                            android:background="@anim/busy"
+                            android:padding="10dp"
+                            android:src="@null" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/map_aim_point_minimal_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/map_aim_point_minimal" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/map_curtain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/map_courtain_bg"
+                android:visibility="gone" >
+            </FrameLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/addresses_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:id="@+id/booking_addresses_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/map_overlay_bg"
+                android:orientation="vertical"
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="2dp"
+                android:paddingTop="2dp" >
+
+                <TextView
+                    android:id="@+id/pickup_location"
+                    style="@style/MapAddressPickup"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pickup_line_default" />
+
+                <TextView
+                    android:id="@+id/dropoff_location"
+                    style="@style/MapAddressDropoff"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dropoff_line_default" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/button_mylocation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/map_button_selector"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/button_my_location_arrow" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:baselineAligned="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <RelativeLayout
+                    android:id="@+id/price_box_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" >
+
+                    <RelativeLayout
+                        android:id="@+id/price_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/map_overlay_bg"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="false"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="2dp"
+                            android:clickable="true"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="$999,99"
+                            android:textColor="#333333"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="2dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="99 MILES"
+                            android:textColor="#444444"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent" >
+
+                    <RelativeLayout
+                        android:id="@+id/button_book"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/map_button_selector"
+                        android:clickable="true"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/button_booking_place_booking" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/busy_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/map_button_selector"
+                        android:clickable="true"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp" >
+
+                        <ImageView
+                            android:id="@+id/busy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@anim/busy"
+                            android:padding="10dp"
+                            android:src="@null" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_start_new_booking_container"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="invisible" >
+
+            <RelativeLayout
+                android:id="@+id/button_start_new_booking"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="@drawable/map_button_selector"
+                android:clickable="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/button_booking_new_booking" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/zoom_controls_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_container"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/button_map_zoom_in"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/map_overlay_bg"
+                android:scaleType="center"
+                android:src="@drawable/ic_btn_plus" />
+
+            <ImageView
+                android:id="@+id/button_map_zoom_out"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/map_overlay_bg"
+                android:scaleType="center"
+                android:src="@drawable/ic_btn_minus" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/debug_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/addresses_container"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/debug_current_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#88ff0000"
+                android:text="CURRENT ADDRESS"
+                android:textColor="#ffffff"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/button_debug_update_drivers"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#aacc0000"
+                android:gravity="center"
+                android:text="Drvrs"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
+                android:typeface="normal"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

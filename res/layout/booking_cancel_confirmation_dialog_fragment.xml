@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical" >
+	<TextView
+		android:id="@+id/dialog_title"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:background="@color/dialog_confirm_bg"
+		android:clickable="false"
+		android:ellipsize="end"
+		android:gravity="center"
+		android:maxLines="1"
+		android:paddingLeft="15dp"
+		android:paddingRight="15dp"
+		android:text="@string/dialog_confirmation_title"
+		android:textColor="@color/dialog_confirm_fg"
+		android:textSize="18dp"
+		android:textStyle="bold" />
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1"
+		android:background="#eeffffff"
+		android:clickable="false"
+		android:gravity="center"
+		android:minHeight="120dp"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp"
+		android:text="@string/booking_cancel_confirmation_message"
+		android:textColor="#333333"
+		android:textSize="16dp" />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+
+		<TextView
+		    android:id="@+id/button_ok"
+		    style="@style/ButtonOk"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginRight="1dp"
+		    android:layout_weight="1"
+		    android:maxLines="1"
+		    android:text="@string/dialog_button_yes" />
+
+		<TextView
+		    android:id="@+id/button_cancel"
+		    style="@style/ButtonCancel"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:maxLines="1"
+		    android:text="@string/dialog_button_no" />
+
+	</LinearLayout>
+</LinearLayout>

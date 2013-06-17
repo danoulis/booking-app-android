@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginRight="40dp"
+	    android:layout_marginTop="20dp"
+	    android:orientation="vertical" >
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="15dp"
+	        android:layout_marginTop="15dp"
+	        android:orientation="vertical" >
+
+	        <EditText
+	            android:id="@+id/et_first_name"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/register_form_first_name_hint"
+	            android:inputType="textCapSentences|textPersonName" >
+
+			</EditText>
+
+	        <EditText
+	            android:id="@+id/et_last_name"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/register_form_last_name_hint"
+	            android:inputType="textCapSentences|textPersonName" />
+
+	        <EditText
+	            android:id="@+id/et_phone"
+	            android:hint="@string/register_form_phone_hint"
+	            android:inputType="phone"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" />
+
+	        <EditText
+	            android:id="@+id/et_email"
+	            android:hint="@string/register_form_email_hint"
+	            android:inputType="textEmailAddress"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" />
+
+	        <EditText
+	            android:id="@+id/et_password1"
+	            android:hint="@string/register_form_password_1_hint"
+	            android:inputType="textPassword"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" />
+
+	        <EditText
+	            android:id="@+id/et_password2"
+	            android:hint="@string/register_form_password_2_hint"
+	            android:inputType="textPassword"
+	            style="@style/TextInput"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" />
+
+	    </LinearLayout>
+
+	    <TextView
+	        android:id="@+id/button_register"
+	        style="@style/ButtonOk"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/register_form_button_register" />
+
+	</LinearLayout>
+
+</RelativeLayout>

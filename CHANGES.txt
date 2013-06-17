@@ -1,0 +1,17 @@
+#### CHANGELOG
+
+v1.2 (2013.06.__)
+-----------------------------
+ - Added activity feedback during new booking placement
+ 
+
+v1.1 (2013.06.17)
+-----------------------------
+ - Fixed cab office data management
+ - Reusing last seen location as startup fallback
+ - Added workaround for GMap issue with current location
+
+
+v1.0 (2013.06.10)
+-----------------------------
+ - Initial release

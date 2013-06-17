@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical" >
+
+	<TextView
+		android:id="@+id/dialog_title"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:background="#eedddddd"
+		android:clickable="false"
+		android:ellipsize="end"
+		android:gravity="center"
+		android:maxLines="1"
+		android:paddingLeft="15dp"
+		android:paddingRight="15dp"
+		android:text="@string/new_booking_dialog_title"
+		android:textColor="#333333"
+		android:textSize="18dp"
+		android:textStyle="bold" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="120dp"
+	    android:orientation="vertical"
+	    android:layout_marginTop="15dp"
+	    android:layout_marginBottom="15dp"
+	    android:paddingLeft="5dp"
+	    android:paddingRight="5dp" >
+
+		<LinearLayout
+		    android:id="@+id/pickup_date_time_container"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="10dp"
+		    android:orientation="vertical" >
+
+		    <LinearLayout
+		        android:id="@+id/pickup_time_container"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content">
+		        <ImageView
+		            android:layout_width="40dp"
+		            android:layout_height="40dp"
+		            android:layout_gravity="center"
+		            android:src="@drawable/icon_clock" />
+
+		        <TextView
+		            android:id="@+id/button_pickup_time"
+		            style="@style/ButtonOk"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:ellipsize="end"
+		            android:maxLines="1"
+		            android:text="PICKUP TIME"
+		            android:textColor="@color/pickup_location"
+		            android:textSize="16dp"
+		            android:textStyle="bold" />
+		    </LinearLayout>
+
+		    <LinearLayout
+		        android:id="@+id/pickup_date_container"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:visibility="gone" >
+
+		        <ImageView
+		            android:layout_width="40dp"
+		            android:layout_height="40dp"
+		            android:layout_gravity="center"
+		            android:src="@drawable/icon_calendar" />
+
+		        <TextView
+		            android:id="@+id/button_pickup_date"
+		            style="@style/ButtonOk"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:ellipsize="end"
+		            android:maxLines="1"
+		            android:text="PICKUP DATE"
+		            android:textColor="@color/pickup_location"
+		            android:textSize="16dp"
+		            android:textStyle="bold" />
+		    </LinearLayout>
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/pickup_container"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+
+			<ImageView
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:src="@drawable/map_marker_pickup" />
+
+			<TextView
+				android:id="@+id/pickup_address"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:ellipsize="end"
+				android:maxLines="4"
+				android:text="DROPOFF"
+				android:textColor="@color/pickup_location"
+				android:textSize="16dp"
+				android:textStyle="bold" />
+		</LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/dropoff_container"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp" >
+
+		    <ImageView
+		        android:layout_width="40dp"
+		        android:layout_height="40dp"
+		        android:src="@drawable/map_marker_dropoff" />
+
+		    <TextView
+		        android:id="@+id/dropoff_address"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:ellipsize="end"
+		        android:maxLines="4"
+		        android:text="DROPOFF"
+		        android:textColor="@color/dropoff_location"
+		        android:textSize="16dp"
+		        android:textStyle="bold" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+
+		<TextView
+			android:id="@+id/button_ok"
+			style="@style/ButtonOk"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="1dp"
+			android:layout_weight="1"
+			android:maxLines="1"
+			android:text="@string/new_booking_dialog_button_ok"
+			android:textStyle="bold" />
+
+		<TextView
+			android:id="@+id/button_cancel"
+			style="@style/ButtonCancel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:maxLines="1"
+			android:text="@string/new_booking_dialog_button_cancel" />
+	</LinearLayout>
+
+</LinearLayout>

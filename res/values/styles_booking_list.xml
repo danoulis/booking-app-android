@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="BookingList">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:divider">#eeeeee</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="BookingListSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#666666</item>
+        <item name="android:textColor">#cccccc</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+
+    <style name="BookingListEntryContainer">
+<!--         <item name="android:background">#ffffff</item> -->
+        <item name="android:paddingTop">5dp</item>
+<!--         <item name="android:paddingBottom">5dp</item> -->
+    </style>
+
+    <style name="BookingListEntryInfoContainer" parent="@style/BookingListEntryContainer">
+		<item name="android:orientation">vertical</item>
+    </style>
+    <style name="BookingListEntryMenuContainer" parent="@style/BookingListEntryContainer">
+        <item name="android:padding">2dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="BookingListEntryMenuButton">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">50dp</item>
+		<item name="android:layout_weight">1</item>
+	    <item name="android:clickable">true</item>
+		<item name="android:padding">3dp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:background">@drawable/booking_list_button_selector</item>
+    </style>
+
+<!-- 	    <item name="android:background">#cccccc</item> -->
+<!-- 		<item name="android:textColor">#333333</item> -->
+<!-- 		<item name="android:textSize">18dp</item> -->
+
+
+
+
+
+	<!-- ####################################################################################################### -->
+
+
+    <style name="BookingListEntry">
+		<item name="android:layout_marginLeft">5dp</item>
+		<item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="BookingListEntryPickup" parent="@style/BookingListEntry">
+        <item name="android:textColor">@color/pickup_location</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16dp</item>
+	</style>
+
+	<style name="BookingListEntryDropoff" parent="@style/BookingListEntry">
+		<item name="android:textColor">@color/dropoff_location</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+</resources>

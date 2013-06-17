@@ -1,0 +1,4 @@
+-keepclassmembers public class com.crittercism.*
+{
+    *;
+}

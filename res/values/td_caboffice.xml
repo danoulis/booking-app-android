@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+<resources>
+	<!-- cab office details and settings -->
+	
+	<!-- fallback location (London, UK) if we were unable to determine starting one too quick. -->
+	<string translatable="false" name="caboffice_default_location_latitude">51.5171</string>
+	<string translatable="false" name="caboffice_default_location_longitude">0.1062</string>
+
+	<integer name="caboffice_settings_new_bookings_max_days_ahead">7</integer>
+	<bool name="caboffice_settings_dropoff_location_is_mandatory">false</bool>
+</resources>
