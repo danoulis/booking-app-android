@@ -646,6 +646,7 @@ public final class WebnetTools
 
 		if("US".equals(countryCode)) { result = false; }	// USA
 		if("UK".equals(countryCode)) { result = false; }	// UK
+		if("GB".equals(countryCode)) { result = false; }	// UK
 		if("LR".equals(countryCode)) { result = false; }	// Liberia
 		if("MM".equals(countryCode)) { result = false; }	// Birma
 
