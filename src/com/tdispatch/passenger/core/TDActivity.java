@@ -64,14 +64,16 @@ public abstract class TDActivity extends android.support.v4.app.FragmentActivity
 		if( (critAppId != null) && (critAppId.length() == 24) ) {
 			JSONObject crittercismConfig = new JSONObject();
 			try {
-//				crittercismConfig.put("delaySendingAppLoad", true);	// send app load data with Crittercism.sendAppLoadData()
-				crittercismConfig.put("shouldCollectLogcat", true);	// necessary for collecting logcat data on Android Jelly Bean devices.
-				crittercismConfig.put("includeVersionCode", true);	// include version code in version name.
+				crittercismConfig.put("delaySendingAppLoad", false);
+				crittercismConfig.put("shouldCollectLogcat", true);
+				crittercismConfig.put("includeVersionCode", true);
+				crittercismConfig.put("customVersionName", TDApplication.getAppVersion() + " (" + TDApplication.getAppVersionCode() + ")" );
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
 			Crittercism.init(getApplicationContext(), critAppId, crittercismConfig);
+			Crittercism.setMetadata( TDApplication.getEnvInfoAsJson() );
 		}
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -106,7 +108,6 @@ public abstract class TDActivity extends android.support.v4.app.FragmentActivity
 			super.setContentView( activityLayout );
 
 			doHandleUiLock(0);
-
 		} else {
 			super.setContentView( layoutId );
 		}
@@ -132,18 +133,12 @@ public abstract class TDActivity extends android.support.v4.app.FragmentActivity
 
 		View v = findViewById( R.id.tdactivity_busy_overlay_container );
 		if( v != null ) {
-
 			mUiLockCount += step;
-
 			if( (mUiLockCount > 0) ) {
-				// hide soft menu
 				InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-				v.setVisibility(View.VISIBLE);
-			} else {
-				v.setVisibility(View.GONE);
 			}
+			v.setVisibility( (mUiLockCount > 0 ) ? View.VISIBLE : View.GONE);
 		}
 
 	}

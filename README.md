@@ -15,9 +15,11 @@ For more details visit www.tdispatch.com
  - English: Marcin Orłowski, Adrian Doonan
  - Deutsch (German): Adrian Doonan
  - Español (Spanish): Xavier Blanche
+ - Français (French): baltmayer
  - Polski (Polish): Marcin Orłowski
- - Italiano (Italian): ???
+ - Italiano (Italian): SoniaMaccarone, tamer, nobis
  - 繁體字 (Traditional Chinese): Julie Ko
+ - 簡體字 (Simplified Chinese): Julie Ko
 
 Thank you for your contribution!
 

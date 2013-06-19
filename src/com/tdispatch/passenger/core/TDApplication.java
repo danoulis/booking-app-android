@@ -1,6 +1,9 @@
 package com.tdispatch.passenger.core;
 
 import java.util.Hashtable;
+import java.util.Locale;
+
+import org.json.JSONObject;
 
 import android.app.Application;
 import android.app.NotificationManager;
@@ -8,8 +11,11 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -76,6 +82,7 @@ final public class TDApplication extends Application
 		mOfficeManager			= OfficeManager.getInstance(mAppContext);
 
 		initPackageInfo();
+		initEnvInfo();
 		checkGoogleServices();
 	}
 
@@ -221,6 +228,42 @@ final public class TDApplication extends Application
 		}
 
 		return result;
+	}
+
+
+
+	protected static JSONObject mEnvInfoJson = new JSONObject();
+	@SuppressWarnings( "deprecation" )
+	protected void initEnvInfo() {
+
+		DisplayMetrics dm = getResources().getDisplayMetrics();
+
+		String orientation = "???";
+		switch( getResources().getConfiguration().orientation ) {
+			case Configuration.ORIENTATION_LANDSCAPE:	orientation = "Landscape";	break;
+			case Configuration.ORIENTATION_PORTRAIT:	orientation = "Portrait";	break;
+			case Configuration.ORIENTATION_SQUARE:		orientation = "Square";		break;
+			case Configuration.ORIENTATION_UNDEFINED:	orientation = "Undef";		break;
+			default:									orientation = "Unknown";	break;
+		}
+
+		try {
+			mEnvInfoJson.put("type", isTablet() ? "tablet" : "phone");
+			mEnvInfoJson.put("build_manufacturer", Build.MANUFACTURER);
+			mEnvInfoJson.put("build_model", Build.MODEL);
+			mEnvInfoJson.put("build_board", Build.BOARD);
+			mEnvInfoJson.put("build_device", Build.DEVICE);
+			mEnvInfoJson.put("build_product", Build.PRODUCT);
+			mEnvInfoJson.put("api", Build.VERSION.SDK_INT + " (" + Build.VERSION.RELEASE + ")");
+			mEnvInfoJson.put("screen", dm.widthPixels + "x" + dm.heightPixels + " (" + dm.densityDpi + "DPI) " + orientation );
+
+			mEnvInfoJson.put("locale", Locale.getDefault());
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	public static JSONObject getEnvInfoAsJson() {
+		return mEnvInfoJson;
 	}
 
 

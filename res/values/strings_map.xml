@@ -28,6 +28,7 @@
 
 	<string name="pickup_line_default">Set pickup location&#8230;</string>
 	<string name="dropoff_line_default">&#8230;</string>
+	<string name="dropoff_line_alternative">Set dropoff location&#8230;</string>
 
 	<string name="map_aim_location_unknown_body">Unable to determine address of location map currently points to. Please try scrolling the map to nearby location to resolve your location again.</string>
 

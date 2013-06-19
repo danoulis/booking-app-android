@@ -7,5 +7,5 @@
   <string name="tour_02_text_02">請點擊\"預訂\"叫一輛計程車。</string>
   <string name="tour_03_text_01">要手動輸入或編輯出發或目的地點或是要執行地址搜索，只需點擊顯示的地址。</string>
   <string name="tour_04_text_01">要隨時更改出發或目的地點，拖動或點擊地圖螢幕帶回來標誌物。</string>
-  <string name="tour_button_ok">OK</string>
+  <string name="tour_button_ok">確定</string>
 </resources>

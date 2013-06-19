@@ -33,4 +33,8 @@
 
 	<integer name="caboffice_settings_new_bookings_max_days_ahead">7</integer>
 	<bool name="caboffice_settings_dropoff_location_is_mandatory">false</bool>
+	<bool name="caboffice_settings_track_nearby_cabs">true</bool>
+	<bool name="caboffice_settings_track_nearby_bookings">true</bool>
+	
+	<bool name="caboffice_settings_use_alternative_dropoff_label">false</bool>
 </resources>

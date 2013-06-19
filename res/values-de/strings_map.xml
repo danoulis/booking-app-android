@@ -3,6 +3,7 @@
 <resources>
   <string name="pickup_line_default">Abholort setzen...</string>
   <string name="dropoff_line_default">...</string>
+  <string name="dropoff_line_alternative">Zielort setzen...</string>
   <string name="map_aim_location_unknown_body">Adresse nicht lokalizierbar. Setzen Sie den Punkt auf einen nähegeliegen Ort, um deinen Abholort festzulegen.</string>
   <string name="new_booking_both_locations_required_to_place_booking">Sowohl Abhol- als Zielort müssen eingegeben werden, um eine Bestellung loszuschicken.</string>
   <string name="new_booking_no_pickup_location_body">Bitte Start zuerst angeben.</string>
@@ -11,5 +12,7 @@
   <string name="new_booking_title">Buchungsbestätigung</string>
   <string name="new_booking_body_fmt">Ihre Buchung wurde absesendet. Ihre Abholort ist \"%s\". Bitte warten Sie auf Ihren Taxi.</string>
   <string name="new_booking_failed_body_fmt">Ihre Buchung konnte nicht abgesendet werden.\n\nReason: %s</string>
+  <string name="unable_to_get_current_location_body">Standort nicht abrufbar. bitte stellen Sie sicher, dass mindestens ein Standortdienst auf Ihr Gerät aktiviert ist.</string>
+  <string name="unable_to_get_current_location_button_show_settings">Systemeinstellungen</string>
   <string name="address_search_button_cancel">Abbrechen</string>
 </resources>

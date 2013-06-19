@@ -1134,7 +1134,12 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 		if( pickup != null ) {
 			WebnetTools.setText(mFragmentView, R.id.pickup_location, pickup.getAddress() );
 		} else {
-			WebnetTools.setText(mFragmentView, R.id.pickup_location, R.string.pickup_line_default);
+
+			int labelId = R.string.pickup_line_default;
+			if( mContext.getResources().getBoolean(R.bool.caboffice_settings_use_alternative_dropoff_label) ) {
+				labelId = R.string.dropoff_line_alternative;
+			}
+			WebnetTools.setText(mFragmentView, R.id.pickup_location, labelId);
 		}
 
 		if( dropoff != null ) {
@@ -1160,19 +1165,16 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 	protected AtomicBoolean mBookingTrackingEnabled = new AtomicBoolean();
 	protected void startBookingTracking() {
-		if( mBookingTrackingEnabled.compareAndSet(false, true) ) {
-			WebnetLog.d("Starting booking tracking...");
-			mHandler.post(mUpdateBookingTrackingRunnable);
-		} else {
-			WebnetLog.e("Booking tracking already running");
+
+		if( mContext.getResources().getBoolean(R.bool.caboffice_settings_track_nearby_bookings ) ) {
+			if( mBookingTrackingEnabled.compareAndSet(false, true) ) {
+				mHandler.post(mUpdateBookingTrackingRunnable);
+			}
 		}
 	}
 	protected void stopBookingTracking() {
-		mHandler.removeCallbacks(mUpdateNearbyCabsRunnable);
-
-		if( mBookingTrackingEnabled.compareAndSet(true, false) == false ) {
-			WebnetLog.e("Booking tracking was not enabled?!");
-		}
+		mHandler.removeCallbacks(mUpdateBookingTrackingRunnable);
+		mBookingTrackingEnabled.compareAndSet(true, false);
 	}
 
 	protected Runnable mUpdateBookingTrackingRunnable = new Runnable()
@@ -1237,19 +1239,16 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 	protected AtomicBoolean mCabTrackingEnabled = new AtomicBoolean();
 	protected void startCabTracking() {
-		if( mCabTrackingEnabled.compareAndSet(false, true) ) {
-			WebnetLog.d("Starting cab tracking...");
-			mHandler.post(mUpdateNearbyCabsRunnable);
-		} else {
-			WebnetLog.e("Cab tracking already running");
+
+		if( mContext.getResources().getBoolean(R.bool.caboffice_settings_track_nearby_cabs) ) {
+			if( mCabTrackingEnabled.compareAndSet(false, true) ) {
+				mHandler.post(mUpdateNearbyCabsRunnable);
+			}
 		}
 	}
 	protected void stopCabTracking() {
 		mHandler.removeCallbacks(mUpdateNearbyCabsRunnable);
-
-		if( mCabTrackingEnabled.compareAndSet(true, false) == false ) {
-			WebnetLog.e("Cab tracking was not enabled?!");
-		}
+		mCabTrackingEnabled.compareAndSet(true, false);
 	}
 
 	protected ArrayList<LatLng> mNearbyTaxis = null;

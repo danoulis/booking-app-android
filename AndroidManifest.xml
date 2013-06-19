@@ -26,8 +26,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="YOUR PACKAGE ID"
-    android:versionCode="2013061700"
-    android:versionName="1.1" >
+    android:versionCode="2013061900"
+    android:versionName="1.2" >
 
     <uses-sdk
         android:minSdkVersion="8"

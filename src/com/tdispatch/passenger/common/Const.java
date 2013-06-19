@@ -28,10 +28,17 @@ public final class Const
 	/* PUT YOUR API ACCESS DATA HERE */
 	public final class Api {
 
-		public static final String BaseDomain		= "api.tdispatch.com";
-		public static final String ApiKey			= "API-KEY";
-		public static final String ClientId			= "CLIENT-ID@tdispatch.com";
-		public static final String ClientSecret	= "SECRET";
+		// PUBLIC DEMO CAB OFFICE
+		public static final String BaseDomain			= "api.tdispatch.com";
+		public static final String ApiKey 			= "a12b31439ffd35f38b22b78833b807f8";
+		public static final String ClientId 			= "HfcS4ydAmz@tdispatch.com";
+		public static final String ClientSecret		= "ll6XMXJ5adPAW7RXmEd3C3kN8v9OcA2d";
+
+		// demo cab office
+//		public static final String BaseDomain			= "api.t-dispatch.co";
+//		public static final String ApiKey 			= "6cc57fbdb46add230d3fd02c772e9ff4";
+//		public static final String ClientId 			= "49ySP6iHVi@tdispatch.com";
+//		public static final String ClientSecret		= "4zDptcpczGRdkeioqwahHkwgWyr6csbw";
 
 
 		/*****************************************************************************************/

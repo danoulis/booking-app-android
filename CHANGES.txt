@@ -1,4 +1,15 @@
-#### CHANGELOG
+
+v1.2 (2013.06.19)
+-----------------------------
+ - Improved register view layout on 320x240 screens
+ - Fixed GB/UK detection
+ - Added French translation
+ - Added Simplified Chinese translation
+ - Updated German translation
+ - Updated Polish translation
+ - Updated Spanish translation
+ - Updated Italian translation
+ 
 
 v1.1 (2013.06.17)
 -----------------------------
