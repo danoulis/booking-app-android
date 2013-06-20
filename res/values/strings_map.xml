@@ -28,11 +28,11 @@
 
 	<string name="pickup_line_default">Set pickup location&#8230;</string>
 	<string name="dropoff_line_default">&#8230;</string>
-	<string name="dropoff_line_alternative">Set dropoff location&#8230;</string>
+	<string name="dropoff_line_alternative">Set destination&#8230;</string>
 
 	<string name="map_aim_location_unknown_body">Unable to determine address of location map currently points to. Please try scrolling the map to nearby location to resolve your location again.</string>
 
-	<string name="new_booking_both_locations_required_to_place_booking">Both pickup and dropoff locations have to be set to place the booking.</string>
+	<string name="new_booking_both_locations_required_to_place_booking">Both pickup and destination have to be set to place the booking.</string>
 
 	<string name="new_booking_no_pickup_location_body">Please specify pickup location first.</string>
 	<string name="new_booking_pickup_date_already_passed">Specified pickup date has already passed.</string>

@@ -5,7 +5,7 @@
   <string name="dropoff_line_default">…</string>
   <string name="dropoff_line_alternative">Ustaw adres docelowy…</string>
   <string name="map_aim_location_unknown_body">Nie moge ustalić adresu miejsca wskazanego na mapie. Przesuń proszę nieznacznie mapę aby aplikacja mogła spróbować ustalić Twój adres ponownie.</string>
-  <string name="new_booking_both_locations_required_to_place_booking">Aby złożyć zlecenie musisz określić adres początkowy oraz końcowy.</string>
+  <string name="new_booking_both_locations_required_to_place_booking">Aby złożyć zlecenie musisz określić adres początkowy oraz docelowy.</string>
   <string name="new_booking_no_pickup_location_body">Ustaw proszę najpierw adres początkowy.</string>
   <string name="new_booking_pickup_date_already_passed">Wybrana data rozpoczęcia podróży juz minęła.</string>
   <string name="new_booking_pickup_date_too_ahead_body_fmt">Nie możesz złożyć zlecenia na więcej niż %d dni naprzód.</string>

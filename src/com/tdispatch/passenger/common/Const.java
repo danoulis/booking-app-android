@@ -34,13 +34,6 @@ public final class Const
 		public static final String ClientId 			= "HfcS4ydAmz@tdispatch.com";
 		public static final String ClientSecret		= "ll6XMXJ5adPAW7RXmEd3C3kN8v9OcA2d";
 
-		// demo cab office
-//		public static final String BaseDomain			= "api.t-dispatch.co";
-//		public static final String ApiKey 			= "6cc57fbdb46add230d3fd02c772e9ff4";
-//		public static final String ClientId 			= "49ySP6iHVi@tdispatch.com";
-//		public static final String ClientSecret		= "4zDptcpczGRdkeioqwahHkwgWyr6csbw";
-
-
 		/*****************************************************************************************/
 
 		public static final String	BaseUrl				= "https://" + BaseDomain;

@@ -1166,7 +1166,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	protected AtomicBoolean mBookingTrackingEnabled = new AtomicBoolean();
 	protected void startBookingTracking() {
 
-		if( mContext.getResources().getBoolean(R.bool.caboffice_settings_track_nearby_bookings ) ) {
+		if( mContext.getResources().getBoolean(R.bool.caboffice_settings_track_bookings ) ) {
 			if( mBookingTrackingEnabled.compareAndSet(false, true) ) {
 				mHandler.post(mUpdateBookingTrackingRunnable);
 			}

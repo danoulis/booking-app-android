@@ -3,5 +3,5 @@
 <resources>
   <string name="address_search_generic_hint">Adresse eingeben</string>
   <string name="address_search_pickup_hint">Abholadresse eingeben</string>
-  <string name="address_search_dropoff_hint">Zieladresse eingeben</string>
+  <string name="address_search_dropoff_hint">Zielort eingeben</string>
 </resources>

@@ -9,6 +9,10 @@ Copyright (C) 2013 T Dispatch Ltd
 
 For more details visit www.tdispatch.com
 
+#### Trademarks
+
+T Dispatch logo, T Dispatch, the T Dispatch T shaped logo are all trademarks of T Dispatch Ltd. 
+ 
 
 #### Translators
 
