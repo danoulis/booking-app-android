@@ -26,14 +26,16 @@
 
 <resources>
 	<!-- cab office details and settings -->
-	<string name="caboffice_maps_api_key">AIzaSyCaxddtdYsofW8digPm2geXQPWEBPW2N7w</string>
-	
+	<string translatable="false" name="caboffice_maps_api_key">YOUR MAPS KEY</string>
+
 	<!-- fallback location (London, UK) if we were unable to determine starting one too quick. -->
 	<string translatable="false" name="caboffice_default_location_latitude">51.5171</string>
 	<string translatable="false" name="caboffice_default_location_longitude">0.1062</string>
 
 	<integer name="caboffice_settings_new_bookings_max_days_ahead">7</integer>
-	
+
+	<bool name="caboffice_settings_hide_demo_warning">false</bool>
+
 	<bool name="caboffice_settings_dropoff_location_is_mandatory">false</bool>
 	<bool name="caboffice_settings_track_nearby_cabs">true</bool>
 	<bool name="caboffice_settings_track_bookings">true</bool>
