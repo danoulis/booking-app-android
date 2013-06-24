@@ -178,17 +178,17 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 
 			Boolean canCancelBooking = false;
 			switch( item.getType() ) {
-				case BookingData.TYPE_QUOTING:
 				case BookingData.TYPE_INCOMING:
 				case BookingData.TYPE_FROM_PARTNER:
 				case BookingData.TYPE_DISPATCHED:
 				case BookingData.TYPE_CONFIRMED:
-				case BookingData.TYPE_ACTIVE:
-				case BookingData.TYPE_COMPLETED:
-				case BookingData.TYPE_DRAFT:
 					canCancelBooking = true;
 					break;
 
+				case BookingData.TYPE_ACTIVE:
+				case BookingData.TYPE_QUOTING:
+				case BookingData.TYPE_DRAFT:
+				case BookingData.TYPE_COMPLETED:
 				case BookingData.TYPE_REJECTED:
 				case BookingData.TYPE_CANCELLED:
 				default:

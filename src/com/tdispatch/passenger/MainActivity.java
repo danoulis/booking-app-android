@@ -16,6 +16,7 @@ import com.tdispatch.passenger.host.MapHostInterface;
 import com.tdispatch.passenger.host.SlideMenuHostInterface;
 import com.tdispatch.passenger.model.BookingData;
 import com.tdispatch.passenger.model.LocationData;
+import com.webnetmobile.tools.Redirector;
 import com.webnetmobile.tools.WebnetTools;
 
 /*
@@ -114,6 +115,21 @@ public class MainActivity extends TDActivity implements MapHostInterface, Bookin
 			}
 		}
 	};
+
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		if( TDApplication.getSessionManager().isAccessTokenValid() == false ) {
+			TDApplication.getSessionManager().doLogout();
+			Redirector.showActivity(mContext, StartActivity.class);
+			finish();
+		}
+
+	}
+
+
 
 	/**[ back key handling ]*********************************************************************************************/
 

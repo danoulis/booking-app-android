@@ -49,12 +49,7 @@ final public class OfficeManager
 	public OfficeManager( TDApplication context ) {
 		mContext = context;
 
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-
-		mOfficeData = new OfficeData(	mPrefs.getString( Const.FleetData.NAME, "---" ),
-										mPrefs.getString( Const.FleetData.PHONE, "---" ),
-										mPrefs.getString( Const.FleetData.EMAIL, "---" )
-									);
+		load();
 	}
 
 	public OfficeData get() {
@@ -62,14 +57,32 @@ final public class OfficeManager
 	}
 
 	public OfficeManager put( OfficeData data ) {
+		mOfficeData = data;
+		save();
 
-		SharedPreferences.Editor editor = mPrefs.edit();
+		return this;
+	}
+	public OfficeManager load() {
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 
-		editor.putString( Const.FleetData.NAME, data.getName() );
-		editor.putString( Const.FleetData.PHONE, data.getPhone() );
-		editor.putString( Const.FleetData.EMAIL, data.getEmail() );
+		mOfficeData = new OfficeData(	mPrefs.getString( Const.FleetData.NAME, "---" ),
+										mPrefs.getString( Const.FleetData.PHONE, "---" ),
+										mPrefs.getString( Const.FleetData.EMAIL, "---" )
+									);
 
-		editor.commit();
+		return this;
+	}
+	public OfficeManager save() {
+
+		if( mOfficeData != null ) {
+			SharedPreferences.Editor editor = mPrefs.edit();
+
+			editor.putString( Const.FleetData.NAME, mOfficeData.getName() );
+			editor.putString( Const.FleetData.PHONE, mOfficeData.getPhone() );
+			editor.putString( Const.FleetData.EMAIL, mOfficeData.getEmail() );
+
+			editor.commit();
+		}
 
 		return this;
 	}

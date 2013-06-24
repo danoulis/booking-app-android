@@ -174,11 +174,6 @@ public abstract class TDActivity extends android.support.v4.app.FragmentActivity
 	}
 
 	@Override
-	public void showStart() {
-		WebnetLog.e("Not implemented!");
-	}
-
-	@Override
 	public void showOAuth() {
 		WebnetLog.e("Not implemented!");
 	}

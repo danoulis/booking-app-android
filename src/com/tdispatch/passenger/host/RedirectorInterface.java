@@ -25,7 +25,6 @@ package com.tdispatch.passenger.host;
 */
 public interface RedirectorInterface
 {
-	public void showStart();
 	public void showLogin();
 	public void showRegister();
 	public void showBooking();

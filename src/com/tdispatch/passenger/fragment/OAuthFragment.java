@@ -114,7 +114,9 @@ public class OAuthFragment extends TDFragment
 			mWebView.setWebViewClient( new MyWebViewClient() );
 			mWebView.setWebChromeClient( new MyWebchromeClient() );
 
-			mWebView.setOnTouchListener( mOnTouchListener );
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+				mWebView.setOnTouchListener( mOnTouchListener );
+			}
 
 			WebSettings webSettings = mWebView.getSettings();
 			webSettings.setJavaScriptEnabled(true);
@@ -249,7 +251,7 @@ public class OAuthFragment extends TDFragment
 
 					long expiresIn = JsonTools.getInt(tokensApiResponse.getJSONObject(), "expires_in", 0) * WebnetTools.MILLIS_PER_SECOND;
 					expiresIn += System.currentTimeMillis();
-					TDApplication.getSessionManager().setAccessTokenExpirationMillis( expiresIn );
+					TDApplication.getSessionManager().setAccessTokenExpirationMillis( expiresIn + System.currentTimeMillis() );
 
 					ApiResponse fleetDataResponse = api.getAccountFleetData();
 					if( fleetDataResponse.getErrorCode() == Const.ErrorCode.OK ) {

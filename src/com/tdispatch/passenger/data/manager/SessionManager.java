@@ -93,6 +93,9 @@ final public class SessionManager
 		return this;
 	}
 
+	public Boolean isAccessTokenValid() {
+		return ((getAccessTokenExpirationMillis() - System.currentTimeMillis()) > 0);
+	}
 
 
 	public SessionManager putAccountData( AccountData data ) {

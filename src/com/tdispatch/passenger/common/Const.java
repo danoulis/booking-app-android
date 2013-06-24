@@ -25,14 +25,14 @@ package com.tdispatch.passenger.common;
 */
 public final class Const
 {
-	/* PUT YOUR API ACCESS DATA HERE */
 	public final class Api {
 
-		// PUBLIC DEMO CAB OFFICE
+		/* PUT YOUR API ACCESS DATA HERE */
 		public static final String BaseDomain			= "api.tdispatch.com";
-		public static final String ApiKey 			= "a12b31439ffd35f38b22b78833b807f8";
-		public static final String ClientId 			= "HfcS4ydAmz@tdispatch.com";
-		public static final String ClientSecret		= "ll6XMXJ5adPAW7RXmEd3C3kN8v9OcA2d";
+		public static final String ApiKey 				= "YOUR API KEY";
+		public static final String ClientId 			= "YOUR CLIENT ID@tdispatch.com";
+		public static final String ClientSecret		= "YOUR CLIENT SECRET";
+
 
 		/*****************************************************************************************/
 

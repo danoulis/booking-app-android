@@ -228,7 +228,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	    int ids[] = {
         				R.id.pickup_location, R.id.dropoff_location,
 
-        				R.id.button_mylocation, R.id.button_book, R.id.button_map_zoom_in, R.id.button_map_zoom_out,
+        				R.id.button_mylocation, R.id.button_book,
         				R.id.button_start_new_booking,
 
         				R.id.left_menu_drag_handle, R.id.right_menu_drag_handle,
@@ -948,24 +948,6 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 					} else {
 						showDialog(GenericDialogFragment.DIALOG_TYPE_ERROR, R.string.dialog_error_title, R.string.map_aim_location_unknown_body);
 //						TDApplication.playSound(Const.Sound.BUZZ);
-					}
-				}
-				break;
-
-				case R.id.button_map_zoom_in: {
-					MapFragment mapFragment = (MapFragment)mFragmentManager.findFragmentById(R.id.map_fragment);
-					if( mapFragment != null ) {
-						CameraUpdate cameraUpdate = CameraUpdateFactory.zoomIn();
-						mapFragment.getMap().animateCamera(cameraUpdate);
-					}
-				}
-				break;
-
-				case R.id.button_map_zoom_out: {
-					MapFragment mapFragment = (MapFragment)mFragmentManager.findFragmentById(R.id.map_fragment);
-					if( mapFragment != null ) {
-						CameraUpdate cameraUpdate = CameraUpdateFactory.zoomOut();
-						mapFragment.getMap().animateCamera(cameraUpdate);
 					}
 				}
 				break;

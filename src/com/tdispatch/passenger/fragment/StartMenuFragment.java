@@ -6,6 +6,7 @@ import android.view.View;
 import com.tdispatch.passenger.R;
 import com.tdispatch.passenger.core.TDFragment;
 import com.tdispatch.passenger.host.MainMenuHostInterface;
+import com.webnetmobile.tools.WebnetTools;
 
 /*
  ******************************************************************************
@@ -39,6 +40,10 @@ public class StartMenuFragment extends TDFragment
 
 	@Override
 	protected void onPostCreateView() {
+
+		WebnetTools.setVisibility(mFragmentView, R.id.demo_warning_container,
+				mContext.getResources().getBoolean(R.bool.caboffice_settings_hide_demo_warning) ? View.GONE : View.VISIBLE );
+
 
 		int ids[] = { R.id.button_login, R.id.button_register };
 

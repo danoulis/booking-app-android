@@ -132,10 +132,9 @@ public class StartActivity extends TDActivity implements TourHostInterface, OAut
 		finish();
 	}
 
-	@Override
 	public void showStart() {
 		StartMenuFragment frag = new StartMenuFragment();
-		setFragment( frag, true );
+		setFragment( frag, false );
 	}
 
 	@Override
