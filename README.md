@@ -21,7 +21,8 @@ T Dispatch logo, T Dispatch, the T Dispatch T shaped logo are all trademarks of 
  - Español (Spanish): Xavier Blanche
  - Français (French): baltmayer
  - Polski (Polish): Marcin Orłowski
- - Italiano (Italian): SoniaMaccarone, tamer, nobis
+ - Українска (Ukrainian): Eugeny Perepelkov
+ - Italiano (Italian): Sonia Maccarone
  - 繁體字 (Traditional Chinese): Julie Ko
  - 簡體字 (Simplified Chinese): Julie Ko
 

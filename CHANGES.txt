@@ -1,3 +1,16 @@
+v1.3 (2013.06.24)
+-----------------------------
+ - Fixed Cab Office details not showing under some conditions
+ - Start fragment is no longer added to back stack
+ - Fixed expired access token handling
+ - Visibility of demo warning is now configurable via cab office settings 
+ - Added Ukrainian translation
+ - Added Traditional Chinese translation
+ - Added French translation
+ - Updated Polish translation
+ - Updated German translation
+ - Updated Spanish translation
+
 
 v1.2 (2013.06.19)
 -----------------------------
