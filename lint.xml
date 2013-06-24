@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HardcodedText">
+        <ignore path="res/layout/booking_confirmation_dialog_fragment.xml" />
+        <ignore path="res/layout/booking_list_row.xml" />
+        <ignore path="res/layout/control_center_fragment.xml" />
+        <ignore path="res/layout/dialog_fragment.xml" />
+    </issue>
+    <issue id="SpUsage">
+        <ignore path="res/layout/address_search_row.xml" />
+        <ignore path="res/layout/booking_cancel_confirmation_dialog_fragment.xml" />
+        <ignore path="res/layout/booking_confirmation_dialog_fragment.xml" />
+        <ignore path="res/layout/booking_list_fragment.xml" />
+        <ignore path="res/layout/control_center_fragment.xml" />
+        <ignore path="res/layout/dialog_fragment.xml" />
+        <ignore path="res/layout/start_menu_fragment.xml" />
+        <ignore path="res/layout/tdfragment.xml" />
+        <ignore path="res/values/styles_booking_list.xml" />
+        <ignore path="res/values/styles_buttons.xml" />
+        <ignore path="res/values/styles_map.xml" />
+        <ignore path="res/values/styles_profile_page.xml" />
+        <ignore path="res/values/styles_toast.xml" />
+        <ignore path="res/values/styles_tour.xml" />
+    </issue>
+    <issue id="UnusedResources">
+        <ignore path="res/values/strings_booking_list.xml" />
+        <ignore path="res/values/strings_dialog.xml" />
+        <ignore path="res/values/strings_map.xml" />
+        <ignore path="res/values/strings_new_booking_dialog.xml" />
+        <ignore path="res/values/strings_office.xml" />
+        <ignore path="res/values/strings_profile.xml" />
+        <ignore path="res/values/strings_register.xml" />
+        <ignore path="res/values/strings_translator_credits.xml" />
+    </issue>
+</lint>
