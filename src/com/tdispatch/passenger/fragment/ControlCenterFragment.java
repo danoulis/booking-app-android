@@ -263,6 +263,8 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	{
 		@Override
 		public void onCameraChange( CameraPosition position ) {
+			mIitialMapLocationSet = true;
+
 			showAimPoint();
 			doReverseGeoCoding( position.target );
 		}
@@ -272,6 +274,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	{
 		@Override
 		public void onMapClick( LatLng point ) {
+			mIitialMapLocationSet = true;
 			showAimPoint(true);
 		}
 	};
@@ -1007,11 +1010,11 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 				break;
 
 				case R.id.pickup_location: {
-					doAddressSearch( AddressSearchFragment.TYPE_PICKUP, getPickupAddress() );
+					doAddressSearch( SearchActivity.TYPE_PICKUP, getPickupAddress() );
 				}
 				break;
 				case R.id.dropoff_location: {
-					doAddressSearch( AddressSearchFragment.TYPE_DROPOFF, getDropoffAddress() );
+					doAddressSearch( SearchActivity.TYPE_DROPOFF, getDropoffAddress() );
 				}
 
 			}
@@ -1091,7 +1094,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 	public void setPickupAddress( LocationData addr ) {
 		if( addr != null ) {
-			WebnetLog.d("pickup addr: " + addr.getAddress() );
+			mIitialMapLocationSet = true;
 		}
 		mPickupAddress = addr;
 	}
@@ -1100,7 +1103,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	}
 	public void setDropoffAddress( LocationData addr ) {
 		if( addr != null ) {
-			WebnetLog.d("dropoff addr: " + addr.getAddress() );
+			mIitialMapLocationSet = true;
 		}
 		mDropoffAddress = addr;
 	}
@@ -1116,18 +1119,19 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 		if( pickup != null ) {
 			WebnetTools.setText(mFragmentView, R.id.pickup_location, pickup.getAddress() );
 		} else {
-
-			int labelId = R.string.pickup_line_default;
-			if( mContext.getResources().getBoolean(R.bool.caboffice_settings_use_alternative_dropoff_label) ) {
-				labelId = R.string.dropoff_line_alternative;
-			}
-			WebnetTools.setText(mFragmentView, R.id.pickup_location, labelId);
+			WebnetTools.setText(mFragmentView, R.id.pickup_location, R.string.pickup_line_default);
 		}
 
 		if( dropoff != null ) {
 			WebnetTools.setText(mFragmentView, R.id.dropoff_location, dropoff.getAddress());
 		} else {
-			WebnetTools.setText(mFragmentView, R.id.dropoff_location, R.string.dropoff_line_default);
+
+			int labelId = R.string.dropoff_line_default;
+			if( mContext.getResources().getBoolean(R.bool.caboffice_settings_use_alternative_dropoff_label) ) {
+				labelId = R.string.dropoff_line_alternative;
+			}
+
+			WebnetTools.setText(mFragmentView, R.id.dropoff_location, labelId );
 		}
 
 		// calc route if we can
@@ -1483,10 +1487,10 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 					LocationData location = intent.getExtras().getParcelable( Const.Bundle.LOCATION );
 
 					switch( type ) {
-						case AddressSearchFragment.TYPE_PICKUP:
+						case SearchActivity.TYPE_PICKUP:
 							setPickupAddress( location );
 							break;
-						case AddressSearchFragment.TYPE_DROPOFF:
+						case SearchActivity.TYPE_DROPOFF:
 							setDropoffAddress( location );
 							break;
 					}

@@ -3,7 +3,6 @@ package com.tdispatch.passenger.fragment;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.tdispatch.passenger.host.RegisterHostInterface;
 import com.tdispatch.passenger.model.AccountData;
 import com.tdispatch.passenger.model.OfficeData;
 import com.webnetmobile.tools.JsonTools;
-import com.webnetmobile.tools.WebnetLog;
 import com.webnetmobile.tools.WebnetTools;
 
 /*
@@ -167,9 +165,9 @@ public class RegisterFragment extends TDFragment
 			lockUI(true);
 		}
 
+
 		@Override
 		protected ApiResponse doInBackground( AccountData ... params ) {
-
 			AccountData account = params[0];
 
 			ApiResponse response = new ApiResponse();
@@ -179,33 +177,34 @@ public class RegisterFragment extends TDFragment
 				response = api.accountCreate(account);
 
 				if( response.getErrorCode() == Const.ErrorCode.OK ) {
-
-					JSONObject tmpJson = JsonTools.getJSONObject(response.getJSONObject(), "passenger");
-						TDApplication.getSessionManager().setAccessToken( JsonTools.getString(tmpJson, "access_token") );
-						TDApplication.getSessionManager().setAccessTokenExpirationMillis( JsonTools.getInt(tmpJson, "expires_in", 0) + System.currentTimeMillis() );
-						TDApplication.getSessionManager().setRefreshToken( JsonTools.getString(tmpJson, "refresh_token") );
+					JSONObject tmpJson = JsonTools.getJSONObject( response.getJSONObject(), "passenger");
+						TDApplication.getSessionManager().setAccessToken(JsonTools.getString(tmpJson, "access_token"));
+						TDApplication.getSessionManager().setRefreshToken(JsonTools.getString(tmpJson, "refresh_token"));
+						TDApplication.getSessionManager().setAccessTokenExpirationMillis(
+								(JsonTools.getInt(tmpJson, "expires_in", (int)WebnetTools.MILLIS_PER_HOUR) * WebnetTools.MILLIS_PER_SECOND) + System.currentTimeMillis()
+						);
 
 					ApiResponse profileResponse = api.getAccountProfile();
 					if( profileResponse.getErrorCode() == Const.ErrorCode.OK ) {
 						JSONObject tmp = profileResponse.getJSONObject();
 						TDApplication.getSessionManager().putAccountData( new AccountData( tmp.getJSONObject("preferences") ));
+
+						ApiResponse fleetDataResponse = api.getAccountFleetData();
+						if( fleetDataResponse.getErrorCode() == Const.ErrorCode.OK ) {
+							JSONObject fleetJson = JsonTools.getJSONObject( fleetDataResponse.getJSONObject(), "data" );
+							OfficeData office = new OfficeData();
+							office.set( fleetJson );
+						}
+
 					} else {
 						TDApplication.getSessionManager().doLogout();
 						response = profileResponse;
 					}
-
-					ApiResponse fleetDataResponse = api.getAccountFleetData();
-					if( fleetDataResponse.getErrorCode() == Const.ErrorCode.OK ) {
-						JSONObject fleetJson = JsonTools.getJSONObject( fleetDataResponse.getJSONObject(), "data" );
-						OfficeData office = new OfficeData();
-						office.set( fleetJson );
-					}
-
 				}
+
 			} catch ( Exception e ) {
 				e.printStackTrace();
 			}
-
 
 			return response;
 		}
@@ -213,7 +212,7 @@ public class RegisterFragment extends TDFragment
 		@Override
 		protected void onPostExecute(ApiResponse response) {
 			if( response.getErrorCode() == Const.ErrorCode.OK ) {
-				mHandler.postDelayed(MyRunnable, 500);
+				mHandler.postDelayed(MyRunnable, 400);
 			} else {
 				lockUI(false);
 				showDialog(GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title), response.getErrorMessage() );

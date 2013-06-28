@@ -25,14 +25,14 @@ package com.tdispatch.passenger.common;
 */
 public final class Const
 {
+	/* PUT YOUR API ACCESS DATA HERE */
 	public final class Api {
 
-		/* PUT YOUR API ACCESS DATA HERE */
+		// PUBLIC DEMO CAB OFFICE
 		public static final String BaseDomain			= "api.tdispatch.com";
-		public static final String ApiKey 				= "YOUR API KEY";
+		public static final String FleetApiKey 		= "YOUR API KEY";
 		public static final String ClientId 			= "YOUR CLIENT ID@tdispatch.com";
 		public static final String ClientSecret		= "YOUR CLIENT SECRET";
-
 
 		/*****************************************************************************************/
 
@@ -60,7 +60,7 @@ public final class Const
 
 	// helpers
 	public static String getApiKey() {
-		return Api.ApiKey;
+		return Api.FleetApiKey;
 	}
 	public static String getOAuthClientId() {
 		return Api.ClientId;
@@ -90,8 +90,10 @@ public final class Const
 		public static final int EXCEPTION_ERROR = -2;
 	}
 
-	public final class RequestCode {
-		public static final int ADDRESS_SEARCH = 0;
+	public final class RequestCode
+	{
+		public static final int ADDRESS_SEARCH 		= 0;
+		public static final int VOICE_RECOGNITION 	= 10000;
 	}
 	public final class Sound
 	{

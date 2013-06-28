@@ -49,8 +49,12 @@ public class OfficeFragment extends TDFragment
 		mOfficeData = TDApplication.getOfficeManager().get();
 
 		WebnetTools.setText(mFragmentView, R.id.office_name,  mOfficeData.getName() );
+
 		WebnetTools.setText(mFragmentView, R.id.office_phone, (mOfficeData.hasPhone()) ? mOfficeData.getPhone() : "---");
+		WebnetTools.setVisibility(mFragmentView, R.id.phone_container, (mOfficeData.hasPhone() ? View.VISIBLE : View.GONE));
+
 		WebnetTools.setText(mFragmentView, R.id.office_email, (mOfficeData.hasEmail()) ? mOfficeData.getEmail() : "---");
+		WebnetTools.setVisibility(mFragmentView, R.id.email_container, (mOfficeData.hasEmail() ? View.VISIBLE : View.GONE));
 
 		int ids[] = { R.id.office_phone, R.id.office_email };
 		for( int id : ids ) {

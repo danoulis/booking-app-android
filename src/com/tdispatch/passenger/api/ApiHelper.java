@@ -79,7 +79,7 @@ final public class ApiHelper extends ApiHelperCore
 	// Accounts
 	public ApiResponse accountCreate( AccountData account ) {
 		ApiRequest req = new ApiRequest( Const.Api.AccountNew );
-		req.addGetParam("key", Const.Api.ApiKey);
+		req.addGetParam("key", Const.Api.FleetApiKey);
 
 		req.addRequestParam("first_name", account.getFirstName());
 		req.addRequestParam("last_name", account.getLastName());

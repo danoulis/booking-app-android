@@ -30,38 +30,6 @@
     android:background="@color/background"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="5dp" >
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@drawable/map_marker_pickup" />
-
-		<!-- hint set in code -->
-        <EditText
-        	android:hint="@string/address_search_generic_hint"
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#bbbbbb"
-            android:lines="2"
-            android:maxLines="2"
-            android:minLines="2"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" >
-
-            <requestFocus />
-        </EditText>
-
-    </LinearLayout>
-
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
@@ -69,6 +37,6 @@
         android:layout_weight="1"
         android:divider="#cccccc"
         android:dividerHeight="1dp"
-        tools:listitem="@layout/address_search_row" />
+        tools:listitem="@layout/search_address_row" />
 
 </LinearLayout>

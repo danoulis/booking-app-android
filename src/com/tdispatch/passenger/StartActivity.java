@@ -29,6 +29,7 @@ import com.tdispatch.passenger.host.TourHostInterface;
 import com.tdispatch.passenger.model.AccountData;
 import com.webnetmobile.tools.JsonTools;
 import com.webnetmobile.tools.Redirector;
+import com.webnetmobile.tools.WebnetLog;
 
 /*
  ******************************************************************************
@@ -159,7 +160,6 @@ public class StartActivity extends TDActivity implements TourHostInterface, OAut
 
 		ft.commit();
 
-		// flush all pending actions. We do not want to wait for async task who knows how long...
 		fm.executePendingTransactions();
 	}
 
@@ -195,6 +195,7 @@ public class StartActivity extends TDActivity implements TourHostInterface, OAut
 
 	@Override
 	public void registerCompleted() {
+		WebnetLog.d("completed");
 		showBooking();
 	}
 
@@ -263,7 +264,7 @@ public class StartActivity extends TDActivity implements TourHostInterface, OAut
 		@Override
 		protected void onPostExecute(Boolean data) {
 			if( data == true ) {
-				mHandler.postDelayed(MyRunnable, 500);
+				mHandler.postDelayed(MyRunnable, 400);
 			}
 		}
 	}

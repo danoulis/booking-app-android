@@ -23,15 +23,11 @@
  ****
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical" >
-
     <RelativeLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:background="@color/background"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_weight="1" >
@@ -62,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/phone_container"
                 style="@style/ProfileContainer"
                 android:layout_width="match_parent" >
 
@@ -75,6 +72,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/email_container"
                 style="@style/ProfileContainer"
                 android:layout_width="match_parent" >
 
@@ -90,4 +88,3 @@
 
     </RelativeLayout>
 
-</LinearLayout>

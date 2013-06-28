@@ -52,6 +52,12 @@ public class LocationData implements Parcelable
 	public LocationData( JSONObject json ) {
 		set( json );
 	}
+	public LocationData( String address, String postCode, double lat, double lng ) {
+		setAddress( address);
+		setPostCode( postCode );
+		setLatitude( lat );
+		setLongitude( lng );
+	}
 	public LocationData( ApiSearchLocationData data ) {
 		setAddress( data.getFullAddress(true) );
 		setPostCode( data.getPostCode() );

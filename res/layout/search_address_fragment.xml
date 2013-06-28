@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingBottom="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="3dp" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/map_marker_pickup" />
+
+		<!-- hint set in code -->
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:hint="@string/address_search_generic_hint"
+            android:lines="2"
+            android:maxLines="2"
+            android:minLines="2"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="#222222" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/button_clear"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_default_selector"
+            android:scaleType="center"
+            android:src="@drawable/ic_clear_search" />
+
+        <ImageView
+            android:id="@+id/button_voice_search"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/button_default_selector"
+            android:scaleType="center"
+            android:src="@drawable/ic_voice_search" />
+
+    </LinearLayout>
+    
+    <FrameLayout        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_indicator_footer_line_height"
+        android:background="@color/default_title_indicator_footer_color" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#cccccc"
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/search_address_row" />
+
+</LinearLayout>

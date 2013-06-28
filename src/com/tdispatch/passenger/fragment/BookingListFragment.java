@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tdispatch.passenger.R;
 import com.tdispatch.passenger.api.ApiHelper;
 import com.tdispatch.passenger.api.ApiResponse;
@@ -58,6 +60,14 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 	protected Handler mHandler = new Handler();
 	protected MapHostInterface mMapHostActivity;
 
+
+	protected ArrayList<ListDataContainer> mBookings = new ArrayList<ListDataContainer>();
+	protected ListAdapter mAdapter;
+
+	protected PullToRefreshListView			mPullListview;
+	protected ListView							mMainListview;
+
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.booking_list_fragment;
@@ -66,9 +76,13 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 	@Override
 	protected void onPostCreateView() {
 
-		ListView lv = (ListView)mFragmentView.findViewById( R.id.list );
+		mPullListview = (PullToRefreshListView) mFragmentView.findViewById(R.id.list);
+		mPullListview.setOnRefreshListener(mListOnRefreshListener); 		// Set a listener to be invoked when the list should be refreshed.
+		mMainListview = mPullListview.getRefreshableView();					// get the "real" mMainListview object to cope with
+
+
 		mAdapter = new ListAdapter( mParentActivity, 0, mBookings );
-		lv.setAdapter( mAdapter );
+		mMainListview.setAdapter( mAdapter );
 
 		int[] ids = { R.id.button_retry };
 		for( int id : ids ) {
@@ -100,8 +114,31 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 	}
 
 
-	protected ArrayList<ListDataContainer> mBookings = new ArrayList<ListDataContainer>();
-	protected ListAdapter mAdapter;
+
+	protected Boolean canCancelBooking( BookingData item ) {
+		Boolean canCancelBooking = false;
+
+		switch( item.getType() ) {
+			case BookingData.TYPE_INCOMING:
+			case BookingData.TYPE_FROM_PARTNER:
+			case BookingData.TYPE_DISPATCHED:
+			case BookingData.TYPE_CONFIRMED:
+				canCancelBooking = true;
+				break;
+
+			case BookingData.TYPE_ACTIVE:
+			case BookingData.TYPE_QUOTING:
+			case BookingData.TYPE_DRAFT:
+			case BookingData.TYPE_COMPLETED:
+			case BookingData.TYPE_REJECTED:
+			case BookingData.TYPE_CANCELLED:
+			default:
+				canCancelBooking = false;
+				break;
+		}
+
+		return canCancelBooking;
+	}
 
 
 	/**[ listener ]**********************************************************************************************************/
@@ -120,6 +157,16 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 		}
 	};
 
+
+	protected OnRefreshListener mListOnRefreshListener	= new PullToRefreshListView.OnRefreshListener() {
+
+		@Override
+		public void onRefresh() {
+			mPullListview.onRefreshComplete();
+			downloadBookings();
+
+		}
+	};
 
 	/**[ adapter ]***********************************************************************************************************/
 
@@ -175,29 +222,8 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 			}
 
 			WebnetTools.setText( view, R.id.pickup_date, WebnetTools.dateDiffToString( item.getPickupDate() ) );
-
-			Boolean canCancelBooking = false;
-			switch( item.getType() ) {
-				case BookingData.TYPE_INCOMING:
-				case BookingData.TYPE_FROM_PARTNER:
-				case BookingData.TYPE_DISPATCHED:
-				case BookingData.TYPE_CONFIRMED:
-					canCancelBooking = true;
-					break;
-
-				case BookingData.TYPE_ACTIVE:
-				case BookingData.TYPE_QUOTING:
-				case BookingData.TYPE_DRAFT:
-				case BookingData.TYPE_COMPLETED:
-				case BookingData.TYPE_REJECTED:
-				case BookingData.TYPE_CANCELLED:
-				default:
-					canCancelBooking = false;
-					break;
-			}
-
 			WebnetLog.d("#" + position + ", Type: " + item.getTypeName() + ", pickup: " + item.getPickupLocation().getAddress());
-			WebnetTools.setVisibility(mFragmentView, R.id.button_cancel_booking, (canCancelBooking) ? View.VISIBLE : View.GONE);
+			WebnetTools.setVisibility(mFragmentView, R.id.button_cancel_booking, canCancelBooking(item) ? View.VISIBLE : View.GONE);
 
 
 			int[] ids = { 	R.id.row_info_container,
@@ -286,20 +312,10 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 					break;
 
 					case R.id.button_cancel_booking: {
-						switch( booking.getType() ) {
-							case BookingData.TYPE_QUOTING:
-							case BookingData.TYPE_INCOMING:
-							case BookingData.TYPE_FROM_PARTNER:
-							case BookingData.TYPE_DISPATCHED:
-							case BookingData.TYPE_CONFIRMED:
-							case BookingData.TYPE_ACTIVE:
-							case BookingData.TYPE_COMPLETED:
-							case BookingData.TYPE_DRAFT: {
-								BookingCancelConfirmationDialogFragment frag = BookingCancelConfirmationDialogFragment.newInstance(booking);
-								frag.setTargetFragment(BookingListFragment.this, 0);
-								frag.show(((FragmentActivity)mParentActivity).getSupportFragmentManager(), "bookingcancelconfirmation");
-							}
-							break;
+						if( canCancelBooking(booking)) {
+							BookingCancelConfirmationDialogFragment frag = BookingCancelConfirmationDialogFragment.newInstance(booking);
+							frag.setTargetFragment(BookingListFragment.this, 0);
+							frag.show(((FragmentActivity)mParentActivity).getSupportFragmentManager(), "bookingcancelconfirmation");
 						}
 					}
 					break;
@@ -342,6 +358,8 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 	public void addBooking( BookingData booking ) {
 		mBookings.add( 0, new ListDataContainer(booking) );
 		mAdapter.notifyDataSetChanged();
+
+		showListEmptyMessage( (mBookings.size() == 0) );
 	}
 
 	public void downloadBookings() {
@@ -376,9 +394,8 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 				if( response.getErrorCode() == Const.ErrorCode.OK) {
 					showListEmptyMessage( (mBookings.size() == 0) );
 
-					ListView lv = (ListView)mFragmentView.findViewById( R.id.list );
 					mAdapter = new ListAdapter( mParentActivity, 0, mBookings );
-					lv.setAdapter( mAdapter );
+					mMainListview.setAdapter( mAdapter );
 
 					downloadFailed = false;
 				}
@@ -496,9 +513,8 @@ public class BookingListFragment extends TDFragment implements BookingCancelConf
 					WebnetLog.d("cancelled @#" + i);
 					mBookings.remove(i);
 
-					ListView lv = (ListView)mFragmentView.findViewById( R.id.list );
 					mAdapter = new ListAdapter( mParentActivity, 0, mBookings );
-					lv.setAdapter( mAdapter );
+					mMainListview.setAdapter( mAdapter );
 
 					showListEmptyMessage( (mBookings.size() == 0) );
 

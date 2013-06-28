@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
@@ -177,12 +176,21 @@ public class OAuthFragment extends TDFragment
 				Uri uri = Uri.parse( url );
 				String mTemporaryAuthCode = uri.getQueryParameter("code");
 
-				if( (mTemporaryAuthCode != null) && (mTemporaryAuthCode.equals("denied") == false) ) {
-					WebnetTools.executeAsyncTask( new GetOAuthAccessTokenAsyncTask(), mTemporaryAuthCode );
-
-				} else if( url.startsWith( mOAuthRedirectToGetTokensUrl ) ) {
-					// nothing
+				if( mTemporaryAuthCode != null) {
+					if (mTemporaryAuthCode.equals("denied") == false) {
+						WebnetTools.executeAsyncTask( new GetOAuthAccessTokenAsyncTask(), mTemporaryAuthCode );
+					} else {
+						mHostActivity.oAuthCancelled();
+					}
 				}
+
+
+//				if( (mTemporaryAuthCode != null) && (mTemporaryAuthCode.equals("denied") == false) ) {
+//					WebnetTools.executeAsyncTask( new GetOAuthAccessTokenAsyncTask(), mTemporaryAuthCode );
+//
+//				} else if( url.startsWith( mOAuthRedirectToGetTokensUrl ) ) {
+//					// nothing
+//				}
 
 				consumed = true;
 			}

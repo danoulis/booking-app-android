@@ -16,15 +16,19 @@ T Dispatch logo, T Dispatch, the T Dispatch T shaped logo are all trademarks of 
 
 #### Translators
 
- - English: Marcin Orłowski, Adrian Doonan
+ - English: Marcin Orłowski
  - Deutsch (German): Adrian Doonan
  - Español (Spanish): Xavier Blanche
  - Français (French): baltmayer
+ - Malay (Malay): JC Way Translation Inc.
  - Polski (Polish): Marcin Orłowski
  - Українска (Ukrainian): Eugeny Perepelkov
+ - русский (Russian): Eugeny Perepelkov
  - Italiano (Italian): Sonia Maccarone
+ - ภาษาไทย (Thai): JC Way Translation Inc.
  - 繁體字 (Traditional Chinese): Julie Ko
  - 簡體字 (Simplified Chinese): Julie Ko
+ - 日本語 (Japansese): JC Way Translation Inc.
 
 Thank you for your contribution!
 
@@ -55,5 +59,6 @@ Thank you for your contribution!
 
 This application uses the following third party components: Sliding Menu Library
 by Jeremy Feinstein released under Apache 2.0 license; Swipe View & Page Control
-by Jason Fry released under Apache 2.0 license; WebnetTools package by Marcin 
-Orłowski. 
+by Jason Fry released under Apache 2.0 license; ViewPageIndicator by Jake Wharton
+released under Apache License, Version 2.0; WebnetTools package by Marcin 
+Orłowski.

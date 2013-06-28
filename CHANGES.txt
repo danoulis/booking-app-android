@@ -1,3 +1,23 @@
+v1.4 (2013.06.28)
+-----------------------------
+ - Added support for location search extension modules
+ - Added pull-to-refresh for booking list
+ - Added voice search support
+ - Added Japanese translation
+ - Added Thai translation
+ - Added Malay translation
+ - Added Russian translation
+ - Fixed issue with booking list now showing newly created first booking
+ - Tour images are now more "language neutral" + match current layout
+ - Cab office view hides email/phone if any of these is not set in office profile
+ - Updated Simplified Chinese translation
+ - Updated Traditional Chinese translation
+ - Updated Polish translation
+ - Updated Spanish translation
+ - Updated German translation
+ - Updated Ukrainian translation
+ 
+
 v1.3 (2013.06.24)
 -----------------------------
  - Fixed Cab Office details not showing under some conditions
