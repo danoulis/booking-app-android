@@ -36,33 +36,29 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:paddingLeft="30dp" >
-
         <TextView
-            android:id="@+id/button_account"
-            style="@style/SideMenuButton"
-            android:layout_marginBottom="40dp"
-            android:minHeight="50dp"
-            android:text="@string/menu_button_account" />
-
+        	android:id="@+id/button_account"
+        	style="@style/SideMenuButton"
+        	android:layout_marginBottom="@dimen/menuEntryMarginTop"
+        	android:minHeight="50dp"
+        	android:text="@string/menu_button_account" />
         <TextView
-            android:id="@+id/button_cab_office"
-            style="@style/SideMenuButton"
-            android:layout_marginBottom="40dp"
-            android:minHeight="50dp"
-            android:text="@string/menu_button_cab_office" />
-
+        	android:id="@+id/button_cab_office"
+        	style="@style/SideMenuButton"
+        	android:layout_marginBottom="@dimen/menuEntryMarginTop"
+        	android:minHeight="50dp"
+        	android:text="@string/menu_button_cab_office" />
         <TextView
-            android:id="@+id/button_tour"
-            style="@style/SideMenuButton"
-            android:layout_marginBottom="40dp"
-            android:minHeight="50dp"
-            android:text="@string/menu_button_tour" />
-
+        	android:id="@+id/button_tour"
+        	style="@style/SideMenuButton"
+        	android:layout_marginBottom="@dimen/menuEntryMarginTop"
+        	android:minHeight="50dp"
+        	android:text="@string/menu_button_tour" />
         <TextView
-            android:id="@+id/button_logout"
-            style="@style/SideMenuButton"
-            android:text="@string/menu_button_logout" />
-
+        	android:id="@+id/button_logout"
+        	style="@style/SideMenuButton"
+        	android:layout_marginBottom="@dimen/menuEntryMarginTop"
+        	android:text="@string/menu_button_logout" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -33,13 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" >
-
         <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00ff00" />
-
+        	android:id="@+id/fragment_container"
+        	android:layout_width="match_parent"
+        	android:layout_height="match_parent" />
         <ImageView
             android:id="@+id/left_menu_drag_handle"
             android:layout_width="wrap_content"
@@ -49,13 +46,10 @@
             android:background="@drawable/drag_handle_left_selector"
             android:clickable="true" />
     </RelativeLayout>
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="24"
-        android:background="#ffff00" >
-
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="24" >
         <FrameLayout
             android:id="@+id/booking_list_fragment"
             android:layout_width="match_parent"

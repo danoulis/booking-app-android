@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ******************************************************************************
+ *
+ * Copyright (C) 2013 T Dispatch Ltd
+ *
+ * Licensed under the GPL License, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************
+ *
+ * @author Marcin Orlowski <marcin.orlowski@webnet.pl>
+ *
+ ****
+-->
+
+    <RelativeLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1" >
+        <LinearLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_centerInParent="true" >
+            <ImageView
+            	android:layout_width="wrap_content"
+            	android:layout_height="130dp"
+            	android:layout_gravity="center"
+            	android:layout_marginRight="10dp"
+            	android:src="@drawable/caboffice_logo" />
+            <LinearLayout
+            	android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:orientation="vertical" >
+                <LinearLayout
+                	style="@style/ProfileContainer"
+                	android:layout_width="match_parent" >
+                	<TextView
+                		style="@style/ProfileLabel"
+                		android:text="@string/office_name" />
+                	<TextView
+                		android:id="@+id/office_name"
+                		style="@style/ProfileEntry" />
+                </LinearLayout>
+                <LinearLayout
+                	android:id="@+id/phone_container"
+                	style="@style/ProfileContainer"
+                	android:layout_width="match_parent" >
+                	<TextView
+                		style="@style/ProfileLabel"
+                		android:text="@string/office_phone" />
+                	<TextView
+                		android:id="@+id/office_phone"
+                		style="@style/ProfileButton" />
+                </LinearLayout>
+                <LinearLayout
+                	android:id="@+id/email_container"
+                	style="@style/ProfileContainer"
+                	android:layout_width="match_parent" >
+                	<TextView
+                		style="@style/ProfileLabel"
+                		android:text="@string/office_email" />
+                	<TextView
+                		android:id="@+id/office_email"
+                		style="@style/ProfileButton" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
