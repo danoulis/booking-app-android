@@ -11,8 +11,8 @@ For more details visit www.tdispatch.com
 
 #### Trademarks
 
-T Dispatch logo, T Dispatch, the T Dispatch T shaped logo are all trademarks of T Dispatch Ltd. 
- 
+T Dispatch logo, T Dispatch, the T Dispatch T shaped logo are all trademarks of T Dispatch Ltd.
+
 
 #### Translators
 
@@ -49,16 +49,33 @@ Thank you for your contribution!
 
 
 #### Build requirements
- 
+
  - Eclipse
  - Android SDK + ADT
  - Google Play Services Lib
 
+You need your T Dispatch Passenger API and Fleet API keys to run the app.
+
 
 #### Open Source licenses
 
-This application uses the following third party components: Sliding Menu Library
-by Jeremy Feinstein released under Apache 2.0 license; Swipe View & Page Control
-by Jason Fry released under Apache 2.0 license; ViewPageIndicator by Jake Wharton
-released under Apache License, Version 2.0; WebnetTools package by Marcin 
-Orłowski.
+This application uses the following third party components:
+
+ - Sliding Menu Library by Jeremy Feinstein
+ - SwipeView & PageControl by Jason Fry
+ - PullToRefresh by Chris Banes
+ - ViewPageIndicator by Jake Wharton
+ - WebnetTools package by Marcin Orłowski
+
+
+#### Screenshots
+
+ ![Screenshot](./screenshots/th/01.png)
+ ![Screenshot](./screenshots/th/02.png)
+ ![Screenshot](./screenshots/th/03.png)
+ ![Screenshot](./screenshots/th/04.png)
+ ![Screenshot](./screenshots/th/05.png)
+ ![Screenshot](./screenshots/th/06.png)
+ ![Screenshot](./screenshots/th/07.png)
+ ![Screenshot](./screenshots/th/08.png)
+ ![Screenshot](./screenshots/th/09.png)

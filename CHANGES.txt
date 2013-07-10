@@ -1,6 +1,7 @@
 v1.5 (2013.07.09)
 -----------------------------
  - Removed unused CALL_PHONE permission
+ - Improved "user experience" in landscape mode
 
 
 v1.4 (2013.06.28)
@@ -21,14 +22,14 @@ v1.4 (2013.06.28)
  - Updated Spanish translation
  - Updated German translation
  - Updated Ukrainian translation
-
+ 
 
 v1.3 (2013.06.24)
 -----------------------------
  - Fixed Cab Office details not showing under some conditions
  - Start fragment is no longer added to back stack
  - Fixed expired access token handling
- - Visibility of demo warning is now configurable via cab office settings
+ - Visibility of demo warning is now configurable via cab office settings 
  - Added Ukrainian translation
  - Added Traditional Chinese translation
  - Added French translation
@@ -47,7 +48,7 @@ v1.2 (2013.06.19)
  - Updated Polish translation
  - Updated Spanish translation
  - Updated Italian translation
-
+ 
 
 v1.1 (2013.06.17)
 -----------------------------
