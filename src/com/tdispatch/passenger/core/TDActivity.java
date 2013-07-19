@@ -1,8 +1,5 @@
 package com.tdispatch.passenger.core;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +13,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import com.crittercism.app.Crittercism;
+import com.crittercism.app.CrittercismConfig;
 import com.tdispatch.passenger.R;
 import com.tdispatch.passenger.common.Const;
 import com.tdispatch.passenger.host.CommonHostInterface;
@@ -62,17 +60,12 @@ public abstract class TDActivity extends android.support.v4.app.FragmentActivity
 
 		String critAppId = getString(R.string.crittercism_app_id);
 		if( (critAppId != null) && (critAppId.length() == 24) ) {
-			JSONObject crittercismConfig = new JSONObject();
-			try {
-				crittercismConfig.put("delaySendingAppLoad", false);
-				crittercismConfig.put("shouldCollectLogcat", true);
-				crittercismConfig.put("includeVersionCode", true);
-				crittercismConfig.put("customVersionName", TDApplication.getAppVersion() + " (" + TDApplication.getAppVersionCode() + ")" );
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-			Crittercism.init(getApplicationContext(), critAppId, crittercismConfig);
+			CrittercismConfig crittercismConfig = new CrittercismConfig();
+				crittercismConfig.setDelaySendingAppLoad(false);
+				crittercismConfig.setLogcatReportingEnabled(true);
+				crittercismConfig.setVersionCodeToBeIncludedInVersionString(true);
+				crittercismConfig.setCustomVersionName( TDApplication.getAppVersion() + " (" + TDApplication.getAppVersionCode() + ")" );
+			Crittercism.initialize(getApplicationContext(), critAppId, crittercismConfig);
 			Crittercism.setMetadata( TDApplication.getEnvInfoAsJson() );
 		}
 

@@ -22,6 +22,7 @@ import com.tdispatch.passenger.host.AddressSearchModuleInterface;
 import com.tdispatch.passenger.model.LocationData;
 import com.viewpagerindicator.PageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
+import com.webnetmobile.tools.WebnetTools;
 
 /*
  ******************************************************************************
@@ -65,6 +66,8 @@ public class SearchActivity extends TDActivity implements AddressSearchHostInter
 		super.onCreate(savedInstanceState);
 
 		setContentView( R.layout.search_activity );
+
+		initModules();
 
 		mAdapter = new PageFragmentAdapter(mFragmentManager);
 
@@ -117,14 +120,26 @@ public class SearchActivity extends TDActivity implements AddressSearchHostInter
 	}
 
 
-	protected String[] pageTitles;
+	protected String[] mPageTitles;
+	protected void initModules() {
+
+		if( getResources().getBoolean(R.bool.caboffice_settings_enable_location_search_modules) ) {
+			mPageTitles = new String[] {
+					getString(R.string.address_search_page_search),
+					getString(R.string.address_search_page_stations)
+				};
+		} else {
+			mPageTitles = new String[] {
+					getString(R.string.address_search_page_search)
+				};
+
+			WebnetTools.setVisibility( this, R.id.indicator, View.GONE);
+		}
+
+	};
 
 	protected class PageFragmentAdapter extends FragmentPagerAdapter
 	{
-		protected String[] pageTitles = new String[] {
-				getString(R.string.address_search_page_search),
-				getString(R.string.address_search_page_stations)
-		};
 
 		public PageFragmentAdapter(FragmentManager fm) {
 			super(fm);
@@ -155,12 +170,12 @@ public class SearchActivity extends TDActivity implements AddressSearchHostInter
 
 		@Override
 		public int getCount() {
-			return pageTitles.length;
+			return mPageTitles.length;
 		}
 
 		@Override
 		public CharSequence getPageTitle( int position ) {
-			return pageTitles[position];
+			return mPageTitles[position];
 		}
 	}
 

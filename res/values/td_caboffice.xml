@@ -25,19 +25,34 @@
 -->
 
 <resources>
-	<!-- cab office details and settings -->
+
+	<!-- application name as seen in launcher -->
+	<string translatable="false" name="app_name">Passenger Demo</string>
+
+	<!-- Google Maps Android v2 API key for your application -->
 	<string translatable="false" name="caboffice_maps_api_key">AIzaSyCaxddtdYsofW8digPm2geXQPWEBPW2N7w</string>
-	
+
 	<!-- fallback location (London, UK) if we were unable to determine starting one too quick. -->
 	<string translatable="false" name="caboffice_default_location_latitude">51.5171</string>
 	<string translatable="false" name="caboffice_default_location_longitude">0.1062</string>
 
+	<!-- max days for the booking to be placed in future -->
 	<integer name="caboffice_settings_new_bookings_max_days_ahead">7</integer>
-	
+
+	<!-- disable demo warning for production releases -->
 	<bool name="caboffice_settings_hide_demo_warning">false</bool>
-	
+
+	<!-- if you do not use stations or other location sources than search, set this to false -->
+	<bool name="caboffice_settings_enable_location_search_modules">true</bool>
+
+	<!-- if true, both locations have to be set for booking to be placed -->
 	<bool name="caboffice_settings_dropoff_location_is_mandatory">false</bool>
+
+	<!-- cab tracking -->
 	<bool name="caboffice_settings_track_nearby_cabs">true</bool>
 	<bool name="caboffice_settings_track_bookings">true</bool>
+
+	<!-- if true, "..." will be replaced by "Set destination location" label -->
 	<bool name="caboffice_settings_use_alternative_dropoff_label">false</bool>
+
 </resources>

@@ -1,3 +1,22 @@
+v1.6 (2013.07.19)
+-----------------------------
+ - Added detailed build step-by-step guide to README
+ - Search modules can now be disabled using boolean resource
+ - Updated debug helper libraries
+ - Added "Ingatestone Station"
+ - Fixed cab office details layout on tablets
+ - Added Swedish translation
+ - Added Korean translation
+ - Updated French translation
+ - Updated Italian translation
+ - Updated Japanese translation
+ - Updated Thai translation
+ - Updated Simplified Chinese translation
+ - Updated Traditional Chinese translation
+ - Updated Malay translation
+ - Updated Polish translation
+
+
 v1.5 (2013.07.09)
 -----------------------------
  - Removed unused CALL_PHONE permission

@@ -67,7 +67,6 @@ public class MapFragment extends SupportMapFragment
 
 			mMap.setTrafficEnabled( false );
 			mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-			mMap.setMyLocationEnabled( false );
 			mMap.setIndoorEnabled( false );
 			mMap.setMyLocationEnabled(true);
 
