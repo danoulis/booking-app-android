@@ -28,13 +28,16 @@ public final class Const
 	/* PUT YOUR API ACCESS DATA HERE */
 	public final class Api {
 
-		// PUBLIC DEMO CAB OFFICE
-		public static final String BaseDomain			= "api.tdispatch.com";
-		public static final String FleetApiKey 		= "YOUR API KEY";
+
+		public static final String FleetApiKey 		= "YOUR FLEET API KEY";
 		public static final String ClientId 			= "YOUR CLIENT ID@tdispatch.com";
 		public static final String ClientSecret		= "YOUR CLIENT SECRET";
 
+
+
 		/*****************************************************************************************/
+
+		public static final String BaseDomain			= "api.tdispatch.com";
 
 		public static final String	BaseUrl				= "https://" + BaseDomain;
 		public static final String	OAuthTokensUrl		= BaseUrl + "/passenger/oauth2/token";
