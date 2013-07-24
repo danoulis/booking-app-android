@@ -518,7 +518,7 @@ public final class WebnetTools
     public static String formatDate( Date date ) {
     	// 2013-03-07T13:26:04+00:00
 
-    	SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd, HH:mm");
+    	SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd, HH:mm", Locale.US);
     	sdf.setTimeZone(TimeZone.getDefault());
     	return sdf.format(date);
     }

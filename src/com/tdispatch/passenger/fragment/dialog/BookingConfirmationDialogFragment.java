@@ -3,6 +3,7 @@ package com.tdispatch.passenger.fragment.dialog;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import android.app.DatePickerDialog;
@@ -123,12 +124,29 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 				case R.id.button_pickup_date: {
 					DialogFragment newFragment = new DatePickerFragment();
+
+					Bundle args = new Bundle();
+					args.putInt( DatePickerFragment.ARGS_YEAR, mPickupYear );
+					args.putInt( DatePickerFragment.ARGS_MONTH, mPickupMonth );
+					args.putInt( DatePickerFragment.ARGS_DAY, mPickupDay );
+					newFragment.setArguments(args);
+
+					newFragment.setTargetFragment( BookingConfirmationDialogFragment.this, 0 );
+
 					newFragment.show( getActivity().getSupportFragmentManager(), "datePicker");
 				}
 				break;
 
 				case R.id.button_pickup_time: {
 					DialogFragment newFragment = new TimePickerFragment();
+
+					Bundle args = new Bundle();
+					args.putInt(TimePickerFragment.ARGS_HOURS, mPickupHour);
+					args.putInt(TimePickerFragment.ARGS_MINUTES, mPickupMinute);
+					newFragment.setArguments(args);
+
+					newFragment.setTargetFragment(BookingConfirmationDialogFragment.this, 0);
+
 					newFragment.show( getActivity().getSupportFragmentManager(), "timePicker");
 				}
 				break;
@@ -171,7 +189,7 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 		String pickupTime = getString(R.string.new_booking_dialog_pickup_time_now);
 		int pickupDateVisibility = View.GONE;
 		if( ((mPickupHour == 0) && (mPickupMinute == 0)) == false ) {
-			pickupTime = String.format("%02d:%02d", mPickupHour, mPickupMinute);
+			pickupTime = String.format(Locale.US, "%02d:%02d", mPickupHour, mPickupMinute);
 			pickupDateVisibility = View.VISIBLE;
 		}
 		WebnetTools.setText(mFragmentView, R.id.button_pickup_time, pickupTime);
@@ -179,7 +197,7 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 		String pickupDate = "";
 		if( ((mPickupYear == 0) && (mPickupMonth == 0) && (mPickupDay == 0)) == false ) {
-			SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM dd yyyy", Locale.US);
 			sdf.setTimeZone(TimeZone.getDefault());
 			pickupDate = sdf.format( new Date(mPickupYear-1900, mPickupMonth, mPickupDay, mPickupHour, mPickupMinute) );
 		}
@@ -198,12 +216,18 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 		}
 	}
 
-	public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
+	public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
 	{
+		public static final String ARGS_HOURS		= "hours";
+		public static final String ARGS_MINUTES	= "minutes";
+
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			int hour = mPickupHour;
-			int minute = mPickupMinute;
+
+			Bundle args = getArguments();
+
+			int hour = args.getInt("hour", 0);
+			int minute = args.getInt("minute", 0);
 
 			if( (hour == 0) && (minute == 0)) {
 				Calendar c = Calendar.getInstance();
@@ -218,13 +242,19 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			mPickupHour = hourOfDay;
-			mPickupMinute = minute;
-
-			initPickupDateOnce();
-			updateDisplay();
+			((BookingConfirmationDialogFragment)getTargetFragment()).onPostTimeSet( hourOfDay, minute );
 		}
 	}
+
+
+	public void onPostTimeSet( int hourOfDay, int minute ) {
+		mPickupHour = hourOfDay;
+		mPickupMinute = minute;
+
+		initPickupDateOnce();
+		updateDisplay();
+	}
+
 
 
 	protected int mPickupYear = 0;
@@ -238,14 +268,21 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 			mPickupDay = c.get(Calendar.DAY_OF_MONTH);
 		}
 	}
-	public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
+
+	public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 	{
+		public static final String ARGS_YEAR	= "year";
+		public static final String ARGS_MONTH	= "month";
+		public static final String ARGS_DAY	= "day";
+
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-			int y = mPickupYear;
-			int m = mPickupMonth;
-			int d = mPickupDay;
+			Bundle args = getArguments();
+
+			int y = args.getInt( ARGS_YEAR, 0);
+			int m = args.getInt( ARGS_MONTH, 0);
+			int d = args.getInt( ARGS_DAY, 0);
 
 			if( (y+m+d) == 0 ) {
 				Calendar c = Calendar.getInstance();
@@ -259,15 +296,18 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 		@Override
 		public void onDateSet(DatePicker view, int year, int month, int day) {
-			mPickupYear = year;
-			mPickupMonth = month;
-			mPickupDay = day;
-
-			initPickupTimeOnce();
-			updateDisplay();
+			((BookingConfirmationDialogFragment)getTargetFragment()).onPostDateSet(year, month, day);
 		}
 	}
 
+	public void onPostDateSet( int year, int month, int day ) {
+		mPickupYear = year;
+		mPickupMonth = month;
+		mPickupDay = day;
+
+		initPickupTimeOnce();
+		updateDisplay();
+	}
 
 
 }	// end of class

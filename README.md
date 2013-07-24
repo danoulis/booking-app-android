@@ -22,8 +22,8 @@ Build requirements
  - Android SDK + ADT
  - Google Play Services Lib
 
-To make the app work you need to collect couple of keys and tokens for various API application is using. 
-Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 Android API. 
+To make the app work you need to collect couple of keys and tokens for various API application is using.
+Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 Android API.
 
  - Add T Dispatch app as your Eclipse project
  - Rename package name (otherwise you will not be able to release the app to the Google App store), by selecting `Rename Application Package`
@@ -33,7 +33,7 @@ Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 A
 
  - Getting T Dispatch Fleet API key:
    - Log in to your T Dispatch cab office account (you need to have office manager rights)
-   - Go to `Preferences` view, then `Settings` there and then `Fleet API`   
+   - Go to `Preferences` view, then `Settings` there and then `Fleet API`
    - Copy your "API key" form there and store in [common/Const.java](src/com/tdispatch/passenger/common/Const.java) as FleetApiKey
    - Contact support (@) tdispatch.com to get your ClientId and ClientSecret tokens for your app and put in
      [common/Const.java](src/com/tdispatch/passenger/common/Const.java) once you get it
@@ -44,50 +44,53 @@ Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 A
      to `Preferences` ->  `Settings` -> `Fleet API` and click `Approve` next to your application name. From now on, you app can
      act on behalf of that cab office unless your access gets revoked manually by cab office managers.
 
- - To make Google Maps works you need to know SHA1 hashes of certificates you will be signing your app with. You should
-   assign both debug and production key to the same API key, to simplify your work. To get SHA1 hashes of your keys you can
-   use `keytool` that comes with SDK or use any keystore management tool or Eclipse plugin you like (the following example
-   use keytool). In you command line type:
-   
+ - To make Google Maps works you need to know SHA1 fingerprints of your certificates you will be signing your app with. We recommend
+   to assign both debug and production certificate to the same API key to simplify your work and release cycle. To get SHA1 print
+   of your certificate you can use `keytool` that bundled comes with Java or use any keystore management tool (standalone or Eclipse plugin)
+   of your choice. The following examples use `keytool`). In you command line type:
+
       `keytool -list -keystore YOUR-KEYSTORE-FILE`
-      
-   After the password prompt you will be listed with all the certificates you got in the keystore. Choose the one that serves as your 
+
+   After the password prompt you will be listed with all the certificates you got in the keystore. Choose the one that serves as your
    production certificate for the project and copy his SHA1 hash. If you know the alias of the certificate you can narrow the list
    to just that one certificate:
-   
-      `keytool -list -keystore YOUR-KEYSTORE-FILE -alias KEY-ALIAS` 
+
+      `keytool -list -keystore YOUR-KEYSTORE-FILE -alias CERTIFICATE-ALIAS`
 
    Now we need to do the same with debug certificate. Location of debug keystore depends on the platform but its location can be
    easily checked by looking in Eclipse `Preferences` -> `Android` -> `Build` -> `Default debug keystore`. Once you got it located,
    you list the certificate the same way (debug keystore password is `android`):
-  
+
       `keytool -list -keystore YOUR-DEBUG-KEYSTORE-FILE -alias androiddebugkey`
-   
+
    Now we need to enable Google Maps API for our app. Go to Google Api Console: https://code.google.com/apis/console/
    then switch to `Services` pane, look for `Google Maps Android API v2` and enable it. Now go to `API Access` pane and create
    Google Maps Android API v2 key for your app, by clicking `Create new Android key...`. Now you need to list what apps shall
    be allowed to use this particular API key. It's done by declaring entries in form `SHA1 hash;package` (and you can enter
    as many entries as you want). So assuming your package id is `com.cabofficename.passenger`, your debug certificate hash is `DE:BB:GG:A1:12:17:F2:56:36:AD:0A:66:2B:26:A0:EE:98:94:B4:02`
-   and your production certificate hash is `AA:BB:CC:DD:36:AD:0A:98:94:B4:02:66:2B:12:17:F2:56:26:A0:EE` you should enter:
-      
+   and your production certificate hash is `AA:BB:CC:DD:36:AD:0A:98:94:B4:02:66:2B:12:17:F2:56:26:A0:EE` you should enter (order is irrelevant):
+
     ```
+
       DE:BB:GG:A1:12:17:F2:56:36:AD:0A:66:2B:26:A0:EE:98:94:B4:02;com.cabofficename.passenger
       AA:BB:CC:DD:36:AD:0A:98:94:B4:02:66:2B:12:17:F2:56:26:A0:EE;com.cabofficename.passenger
+
     ```
- 
-   And you get your API key as the result (which looks like `AIzaTxknt93Lxj3J8ao5yhvcYjxxTjpa2,bh742`) and you put it
-   in [res/values/td_caboffice.xml](res/values/td_caboffice.xml) file as `caboffice_maps_api_key` entry. 
-   
- - Tweak app settings by editing [res/values/td_caboffice.xml](res/values/td_caboffice.xml) file. Especially ensure you set own name for the app 
-   (the one that will show under the app icon on the device). Common pattern is to use cab office name.
+
+   And you get your API key as the result (which looks like `AIzaTxknt93Lxj3J8ao5yhvcYjxxTjpa2bh742`) and you put it
+   in [res/values/td_caboffice.xml](res/values/td_caboffice.xml) file as `caboffice_maps_api_key` entry.
+
+ - Tweak app settings by editing [res/values/td_caboffice.xml](res/values/td_caboffice.xml) file:
+    - Ensure you set own name for the app (the one that will show under the app icon on the device).
+      Common pattern is to use cab office name.
     - Change application icon (`ic_launcher` asset in `drawable-*` folders).
     - Set proper default fallback location so it points to geographically correct location.
     - Disable demo warning by setting `caboffice_settings_hide_demo_warning` to `false`
     - Plant cab office logo image (`caboffice_logo` asset in `drawable-*` folders). We suggest you keep it no bigger than
       `300dp x 300dp` (density independent pixels, **NOT** raw pixels) bounds.
-   
- - Build.  
-   
+
+ - Build.
+
 
 
 #### Translators
@@ -98,6 +101,7 @@ Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 A
  - Français (French): baltmayer
  - Malay (Malay): JC Way Translation Inc.
  - Polski (Polish): Marcin Orłowski
+ - Português do Brasil (Brazilian Portuguese): Mario Brandão, Bernardo Heynemann
  - Svenska (Swedish): strix
  - Українска (Ukrainian): Eugeny Perepelkov
  - русский (Russian): Eugeny Perepelkov
@@ -137,7 +141,7 @@ This application uses the following third party components:
  - WebnetTools package by Marcin Orłowski
 
 
-#### Screenshots
+#### Screenshots Phone
 
  ![Screenshot](./screenshots/th/01.png)
  ![Screenshot](./screenshots/th/02.png)
@@ -148,3 +152,8 @@ This application uses the following third party components:
  ![Screenshot](./screenshots/th/07.png)
  ![Screenshot](./screenshots/th/08.png)
  ![Screenshot](./screenshots/th/09.png)
+
+#### Screenshots Tablets
+
+ ![Screenshot](./screenshots/th/tablet_01.png)
+ ![Screenshot](./screenshots/th/tablet_02.png)

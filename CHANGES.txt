@@ -1,3 +1,11 @@
+v1.7 (2013.07.24)
+-----------------------------
+ - Added Brazilian Portugese translation
+ - Fixed "This Fragment Inner class Should be Static" issue
+ - Fixed empty passenger data fields being being send as "null" instead of empty string
+ - Added tablet screenshots to README.md
+
+
 v1.6 (2013.07.19)
 -----------------------------
  - Added detailed build step-by-step guide to README

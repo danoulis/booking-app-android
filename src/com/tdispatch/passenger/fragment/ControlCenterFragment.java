@@ -674,17 +674,13 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 					JSONObject passenger = new JSONObject();
 						passenger.put("name", user.getFullName());
-						passenger.put("phone", user.getPhone());
-						passenger.put("email", user.getEmail());
+						passenger.put("phone", (user.getPhone() != null) ? user.getPhone() : "");
+						passenger.put("email", (user.getEmail() != null) ? user.getEmail() : "");
 						json.put("passenger", passenger);
-
-					// pickup_time
 
 					// pickup location
 					json.put( "pickup_location", pickup.toJSON() );
-					WebnetLog.d("pickup: " + pickup.toJSON());
 
-					WebnetLog.d("pickuptime: " + pickupMillis);
 					if( pickupMillis != null ) {
 						Time t = new Time();
 						t.set( pickupMillis );
@@ -696,9 +692,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 					// dropoff
 					if( mDropoffAddress != null ) {
 						json.put( "dropoff_location", dropoff.toJSON() );
-						WebnetLog.d("dropoff: " + dropoff.toJSON());
 					}
-
 
 					json.put("passengers", 1);
 					json.put("status", "incoming");
@@ -1318,8 +1312,6 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	/**[ Map overlays ]*************************************************************************************/
 
 	protected void refreshMapOverlays() {
-
-		WebnetLog.d("Refreshing overlays");
 
 		MapFragment mapFragment = (MapFragment)mFragmentManager.findFragmentById(R.id.map_fragment);
 		if( mapFragment != null ) {

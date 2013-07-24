@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="ContentDescription" severity="ignore" />
     <issue id="HardcodedText">
         <ignore path="res/layout/booking_confirmation_dialog_fragment.xml" />
         <ignore path="res/layout/booking_list_row.xml" />
         <ignore path="res/layout/control_center_fragment.xml" />
         <ignore path="res/layout/dialog_fragment.xml" />
     </issue>
-    <issue id="SpUsage">
+    <issue id="InlinedApi" severity="ignore" />
+    <issue id="MergeRootFrame" severity="ignore" />
+    <issue id="SpUsage" severity="ignore">
         <ignore path="res/layout/address_search_row.xml" />
         <ignore path="res/layout/booking_cancel_confirmation_dialog_fragment.xml" />
         <ignore path="res/layout/booking_confirmation_dialog_fragment.xml" />
@@ -32,4 +35,5 @@
         <ignore path="res/values/strings_register.xml" />
         <ignore path="res/values/strings_translator_credits.xml" />
     </issue>
+    <issue id="UseCompoundDrawables" severity="ignore" />
 </lint>
