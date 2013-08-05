@@ -55,4 +55,14 @@
 	<!-- if true, "..." will be replaced by "Set destination location" label -->
 	<bool name="caboffice_settings_use_alternative_dropoff_label">false</bool>
 	
+	<!-- minumum number of minutes the booking have to be placed ahead to be accepted. -->
+	<!-- set to 0 (default) to enable "NOW" bookings -->
+	<integer name="caboffice_minimum_allowed_pickup_time_offset_in_minutes">0</integer>
+	
+	
+	<!-- if set to true, user will have to accept your Terms and Conditions to register -->
+	<bool name="caboffice_tos_must_accept_on_signup">true</bool>
+	<!-- URL to Terms and Conditions document for user to review prior registration -->
+	<string translatable="false" name="caboffice_tos_url">http://tdispatch.com/</string>
+	
 </resources>

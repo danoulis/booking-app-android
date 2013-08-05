@@ -30,13 +30,13 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tdispatch.passenger"
-    android:versionCode="2013071901"
+    android:versionCode="2013080500"
     android:installLocation="auto"
-    android:versionName="1.6" >
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />

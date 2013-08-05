@@ -61,4 +61,17 @@
         	android:text="@string/menu_button_logout" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="3dp"
+        android:paddingRight="3dp"
+        android:text="vx.xx"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#888888"
+        android:textSize="14dp" />
+    
 </RelativeLayout>

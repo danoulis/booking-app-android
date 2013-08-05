@@ -26,5 +26,6 @@
 
 <resources>
 	<string translatable="false" name="crittercism_app_id">518a00d94002057042000007</string>
+	<string translatable="false" name="source_code_signature">2013080500</string>
     <bool name="sys_is_tablet">false</bool>
 </resources>

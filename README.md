@@ -29,7 +29,6 @@ Mandatory are T Dispatch APIs (Fleet API and Passenger API) and Google Maps v2 A
  - Install Google Play Services SDK: http://developer.android.com/google/play-services/setup.html
  - Import T Dispatch Passenger application sources as your Eclipse project
  - Reference Google Play Services: http://developer.android.com/tools/projects/projects-eclipse.html#ReferencingLibraryProject 
-
  - Rename package name (otherwise you will not be able to release the app to the Google App store), by selecting `Rename Application Package`
    in `Android Tools` context menu (press right mouse button over project root node). Choose your name wisely - you will no able to change
    it once app is released. The common pattern is to use domain name here. For example if the cab office uses `cabofficename.com` domain,

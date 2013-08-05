@@ -22,20 +22,21 @@
  *
  ****
 -->
-
-
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    >
+
 	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="20dp"
-		android:layout_marginRight="20dp"
-		android:orientation="vertical" >
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:orientation="vertical" >
+
 	    <LinearLayout
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
+	        android:layout_height="match_parent"
 	        android:layout_marginBottom="15dp"
 	        android:layout_marginTop="15dp"
 	        android:orientation="vertical" >
@@ -89,6 +90,31 @@
 	            style="@style/TextInput"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content" />
+
+	        <LinearLayout
+	            android:id="@+id/tos_container"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="vertical" >
+
+	            <CheckBox
+	                android:id="@+id/cb_tos"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="@string/register_form_terms_and_conditions" />
+
+	            <TextView
+	                android:id="@+id/button_tos"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_horizontal"
+	                android:layout_marginTop="10dp"
+	                android:text="@string/register_form_button_show_terms_and_conditions"
+	                android:textAppearance="?android:attr/textAppearanceMedium"
+	                android:textColor="@color/link_fg"
+	                android:textSize="14dp" />
+
+	        </LinearLayout>
 
 	    </LinearLayout>
 

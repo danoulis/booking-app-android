@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -530,13 +531,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 	protected String mBookingFeeDistanceFormatted 	= "";
 
 	protected void getRouteAndBookingPrice( LocationData pickup, LocationData dropoff ) {
-		getRouteAndBookingPrice(
-								(pickup != null) ? pickup.getLatLng() : null,
-								(dropoff != null) ? dropoff.getLatLng() : null
-								);
-	}
 
-	protected void getRouteAndBookingPrice( LatLng pickup, LatLng dropoff ) {
 		if( (pickup != null) && (dropoff != null) ) {
 			mRouteAndFeeQueue.add( new PickupAndDropoff(pickup, dropoff));
 			if( mRouteAndFeeRunning.compareAndSet(false, true) ) {
@@ -545,7 +540,23 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 		} else {
 			refreshMapOverlays();
 		}
+
+//		getRouteAndBookingPrice(
+//								(pickup != null) ? pickup.getLatLng() : null,
+//								(dropoff != null) ? dropoff.getLatLng() : null
+//								);
 	}
+
+//	protected void getRouteAndBookingPrice( LatLng pickup, LatLng dropoff ) {
+//		if( (pickup != null) && (dropoff != null) ) {
+//			mRouteAndFeeQueue.add( new PickupAndDropoff(pickup, dropoff));
+//			if( mRouteAndFeeRunning.compareAndSet(false, true) ) {
+//				WebnetTools.executeAsyncTask( new GetRouteAndFeeAsyncTask() );
+//			}
+//		} else {
+//			refreshMapOverlays();
+//		}
+//	}
 
 	protected class GetRouteAndFeeAsyncTask extends AsyncTask<Void, Void, List<LatLng>> {
 
@@ -601,7 +612,7 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 			} while (mRouteAndFeeQueue.isEmpty() == false);
 
 			if( mBookingFeeCalculated.get() ) {
-				GoogleMapRouteHelper gm = new GoogleMapRouteHelper( lastLocation.getPickup(), lastLocation.getDropoff() );
+				GoogleMapRouteHelper gm = new GoogleMapRouteHelper( lastLocation.getPickup().getLatLng(), lastLocation.getDropoff().getLatLng() );
 				routePointList = gm.getDirections();
 			}
 
@@ -627,162 +638,6 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 
 	/*****************************************************************************************************************/
-
-	protected boolean doPlaceBooking( LocationData pickup, LocationData dropoff, Long pickupMillis ) {
-
-		int threshold = getResources().getInteger(R.integer.caboffice_settings_new_bookings_max_days_ahead);
-
-		Boolean result = false;
-		Boolean pickupMillisInvalid = false;
-		String pickupMillisBodyId = "";
-
-		if( pickupMillis != null ) {
-			Long diff = (pickupMillis - System.currentTimeMillis());
-
-			if( diff > 0 ) {
-
-				if( diff > (WebnetTools.MILLIS_PER_MINUTE * 5) ) {
-					if( diff < (WebnetTools.MILLIS_PER_DAY * threshold) ) {
-						// 	keep it
-					} else {
-						pickupMillisBodyId  = getString(R.string.new_booking_pickup_date_too_ahead_body_fmt, threshold);
-						pickupMillisInvalid = true;
-					}
-				} else {
-					pickupMillis = null;
-				}
-
-			} else {
-				pickupMillisBodyId  = getString(R.string.new_booking_pickup_date_already_passed);
-				pickupMillisInvalid = true;
-			}
-
-		}
-
-
-		if( pickupMillisInvalid == false ) {
-
-			if( mPickupAddress != null ) {
-
-				mCommonHostActivity.lockUI();
-
-				// prepare booking
-				try {
-					AccountData user = TDApplication.getSessionManager().getAccountData();
-
-					JSONObject json = new JSONObject();
-
-					JSONObject passenger = new JSONObject();
-						passenger.put("name", user.getFullName());
-						passenger.put("phone", (user.getPhone() != null) ? user.getPhone() : "");
-						passenger.put("email", (user.getEmail() != null) ? user.getEmail() : "");
-						json.put("passenger", passenger);
-
-					// pickup location
-					json.put( "pickup_location", pickup.toJSON() );
-
-					if( pickupMillis != null ) {
-						Time t = new Time();
-						t.set( pickupMillis );
-
-						String timeStr = t.format3339(false).replace(".000+", "+");		// FIXME API BUG
-						json.put("pickup_time", timeStr);
-					}
-
-					// dropoff
-					if( mDropoffAddress != null ) {
-						json.put( "dropoff_location", dropoff.toJSON() );
-					}
-
-					json.put("passengers", 1);
-					json.put("status", "incoming");
-
-					WebnetTools.executeAsyncTask( new NewBookingAsyncTask(), json);
-
-					result = true;
-
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-
-			} else {
-				showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR,
-						R.string.dialog_error_title, R.string.new_booking_no_pickup_location_body );
-			}
-
-		} else {
-			showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title), pickupMillisBodyId );
-		}
-
-		if( result == false ) {
-			mCommonHostActivity.unlockUI();
-		}
-
-		return result;
-	}
-
-
-
-	protected class NewBookingAsyncTask extends AsyncTask<JSONObject, Void, ApiResponse> {
-
-		@Override
-		protected void onPreExecute() {
-			showBusy(BUSY_GETTING_ROUTE_AND_PRICE);
-		}
-
-		@Override
-		protected ApiResponse doInBackground( JSONObject ... params ) {
-			JSONObject newBooking = params[0];
-
-			ApiResponse response = new ApiResponse();
-
-			ApiHelper api = ApiHelper.getInstance( TDApplication.getAppContext() );
-			try {
-				response = api.bookingsNewBooking(newBooking);
-
-			} catch( Exception e) {
-				e.printStackTrace();
-			}
-
-			return response;
-		}
-
-		@Override
-		protected void onPostExecute(ApiResponse result) {
-
-			if( result.getErrorCode() == Const.ErrorCode.OK ) {
-
-				WebnetLog.e("OK OK. Booked: " + result.getJSONObject());
-
-				BookingData placedBooking = new BookingData( JsonTools.getJSONObject( result.getJSONObject(), "booking") );
-
-				// update booking list
-				mBookingListHostActivity.addBooking( placedBooking );
-
-				// place booking
-				String msg = String.format( getString(R.string.new_booking_body_fmt), placedBooking.getPickupLocation().getAddress());
-				showDialog( GenericDialogFragment.DIALOG_TYPE_OK, getString(R.string.new_booking_title), msg );
-
-				// reset UI (addresses)
-				mRoutePointList = null;
-
-				setPickupAddress(null);
-				setDropoffAddress(null);
-
-				updateAddresses();
-				setUIControlsVisibility(false);
-
-				refreshMapOverlays();
-			} else {
-				showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title),
-						String.format(getString(R.string.new_booking_failed_body_fmt), result.getErrorMessage())
-						);
-			}
-
-			hideBusy(BUSY_GETTING_ROUTE_AND_PRICE);
-			mCommonHostActivity.unlockUI();
-		}
-	}
 
 
 	protected Location getMyLocation() {
@@ -1020,9 +875,156 @@ public class ControlCenterFragment extends TDFragment implements BookingConfirma
 
 	@Override
 	public void bookingConfirmed( LocationData pickup, LocationData dropoff, Long pickupMillis ) {
-		doPlaceBooking( pickup, dropoff, pickupMillis );
+
+		int maxDaysAhead = getResources().getInteger(R.integer.caboffice_settings_new_bookings_max_days_ahead);
+
+		Boolean result = false;
+		Boolean pickupMillisInvalid = false;
+		String pickupMillisBodyId = "";
+
+		if( pickupMillis != null ) {
+			Long diff = (pickupMillis - System.currentTimeMillis());
+
+			if( diff > 0 ) {
+
+				if( diff > (WebnetTools.MILLIS_PER_MINUTE * 5) ) {
+					if( diff < (WebnetTools.MILLIS_PER_DAY * maxDaysAhead) ) {
+						// 	keep it
+					} else {
+						pickupMillisBodyId  = getString(R.string.new_booking_pickup_date_too_ahead_body_fmt, maxDaysAhead);
+						pickupMillisInvalid = true;
+					}
+				} else {
+					pickupMillis = null;
+				}
+
+			} else {
+				pickupMillisBodyId  = getString(R.string.new_booking_pickup_date_already_passed);
+				pickupMillisInvalid = true;
+			}
+
+		}
+
+
+		if( pickupMillisInvalid == false ) {
+			if( mPickupAddress != null ) {
+				mCommonHostActivity.lockUI();
+
+				// prepare booking
+				try {
+					AccountData user = TDApplication.getSessionManager().getAccountData();
+
+					JSONObject json = new JSONObject();
+
+					JSONObject passenger = new JSONObject();
+						passenger.put("name", user.getFullName());
+						passenger.put("phone", (user.getPhone() != null) ? user.getPhone() : "");
+						passenger.put("email", (user.getEmail() != null) ? user.getEmail() : "");
+						json.put("passenger", passenger);
+
+					// pickup location
+					json.put( "pickup_location", pickup.toJSON() );
+
+					if( pickupMillis != null ) {
+						Time t = new Time();
+						t.set( pickupMillis );
+
+						String timeStr = t.format3339(false).replace(".000+", "+");		// FIXME API BUG
+						json.put("pickup_time", timeStr);
+					}
+
+					// dropoff
+					if( mDropoffAddress != null ) {
+						json.put( "dropoff_location", dropoff.toJSON() );
+					}
+
+					json.put("passengers", 1);
+					json.put("status", "incoming");
+
+					WebnetTools.executeAsyncTask( new NewBookingAsyncTask(), json);
+
+					result = true;
+
+				} catch ( Exception e ) {
+					e.printStackTrace();
+				}
+
+			} else {
+				showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR,
+						R.string.dialog_error_title, R.string.new_booking_no_pickup_location_body );
+			}
+
+		} else {
+			showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title), pickupMillisBodyId );
+		}
+
+		if( result == false ) {
+			mCommonHostActivity.unlockUI();
+		}
+
 	}
 
+
+	protected class NewBookingAsyncTask extends AsyncTask<JSONObject, Void, ApiResponse> {
+
+		@Override
+		protected void onPreExecute() {
+			showBusy(BUSY_GETTING_ROUTE_AND_PRICE);
+		}
+
+		@Override
+		protected ApiResponse doInBackground( JSONObject ... params ) {
+			JSONObject newBooking = params[0];
+
+			ApiResponse response = new ApiResponse();
+
+			ApiHelper api = ApiHelper.getInstance( TDApplication.getAppContext() );
+			try {
+				response = api.bookingsNewBooking(newBooking);
+
+			} catch( Exception e) {
+				e.printStackTrace();
+			}
+
+			return response;
+		}
+
+		@Override
+		protected void onPostExecute(ApiResponse result) {
+
+			if( result.getErrorCode() == Const.ErrorCode.OK ) {
+
+				WebnetLog.e("OK OK. Booked: " + result.getJSONObject());
+
+				BookingData placedBooking = new BookingData( JsonTools.getJSONObject( result.getJSONObject(), "booking") );
+
+				// update booking list
+				mBookingListHostActivity.addBooking( placedBooking );
+
+				// place booking
+				String msg = String.format( getString(R.string.new_booking_body_fmt), placedBooking.getPickupLocation().getAddress());
+				showDialog( GenericDialogFragment.DIALOG_TYPE_OK, getString(R.string.new_booking_title), msg );
+
+				// reset UI (addresses)
+				mRoutePointList = null;
+
+				setPickupAddress(null);
+				setDropoffAddress(null);
+
+				updateAddresses();
+				setUIControlsVisibility(false);
+
+				refreshMapOverlays();
+			} else {
+				showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title),
+						String.format(getString(R.string.new_booking_failed_body_fmt), result.getErrorMessage())
+						);
+			}
+
+			hideBusy(BUSY_GETTING_ROUTE_AND_PRICE);
+			mCommonHostActivity.unlockUI();
+		}
+	}
 
 
 	/*****************************************************************************************************************/

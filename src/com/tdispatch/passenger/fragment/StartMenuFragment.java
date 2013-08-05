@@ -2,8 +2,10 @@ package com.tdispatch.passenger.fragment;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.tdispatch.passenger.R;
+import com.tdispatch.passenger.core.TDApplication;
 import com.tdispatch.passenger.core.TDFragment;
 import com.tdispatch.passenger.host.MainMenuHostInterface;
 import com.webnetmobile.tools.WebnetTools;
@@ -33,6 +35,9 @@ import com.webnetmobile.tools.WebnetTools;
 */
 public class StartMenuFragment extends TDFragment
 {
+	protected int mLogoTapCount = 0;
+
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.start_menu_fragment;
@@ -41,11 +46,15 @@ public class StartMenuFragment extends TDFragment
 	@Override
 	protected void onPostCreateView() {
 
+		TextView version = (TextView)mFragmentView.findViewById(R.id.version);
+		version.setText( TDApplication.getAppVersion() + " (" + getString(R.string.source_code_signature) + ")" );
+		version.setVisibility(View.GONE);
+
 		WebnetTools.setVisibility(mFragmentView, R.id.demo_warning_container,
 				mContext.getResources().getBoolean(R.bool.caboffice_settings_hide_demo_warning) ? View.GONE : View.VISIBLE );
 
 
-		int ids[] = { R.id.button_login, R.id.button_register };
+		int ids[] = { R.id.button_login, R.id.button_register, R.id.logo };
 
 		for( int id : ids ) {
 			View v = mFragmentView.findViewById( id );
@@ -72,6 +81,16 @@ public class StartMenuFragment extends TDFragment
 		public void onClick( View v ) {
 
 			switch( v.getId() ) {
+
+				case R.id.logo: {
+					mLogoTapCount++;
+					if( mLogoTapCount >= 5 ) {
+						WebnetTools.setVisibility(mFragmentView, R.id.version, View.VISIBLE);
+					}
+				}
+				break;
+
+
 
 				case R.id.button_login: {
 					mHostActivity.showOAuth();

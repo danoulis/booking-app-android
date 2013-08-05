@@ -1,6 +1,5 @@
 package com.tdispatch.passenger.model;
 
-import com.google.android.gms.maps.model.LatLng;
 
 /*
  ******************************************************************************
@@ -27,34 +26,34 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class PickupAndDropoff
 {
-	protected LatLng mPickup;
-	protected LatLng mDropoff;
+	protected LocationData mPickup;
+	protected LocationData mDropoff;
 
 	public PickupAndDropoff() {
 		// dummy
 	}
 
-	public PickupAndDropoff(LatLng pickup, LatLng dropoff) {
+	public PickupAndDropoff(LocationData pickup, LocationData dropoff) {
 		mPickup = pickup;
 		mDropoff = dropoff;
 	}
 
-	public PickupAndDropoff setPickup( LatLng data ) {
+	public PickupAndDropoff setPickup( LocationData data ) {
 		mPickup = data;
 		return this;
 
 	}
 
-	public LatLng getPickup() {
+	public LocationData getPickup() {
 		return mPickup;
 	}
 
-	public PickupAndDropoff setDropoff( LatLng data ) {
+	public PickupAndDropoff setDropoff( LocationData data ) {
 		mDropoff = data;
 		return this;
 	}
 
-	public LatLng getDropoff() {
+	public LocationData getDropoff() {
 		return mDropoff;
 	}
 

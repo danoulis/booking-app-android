@@ -1,3 +1,17 @@
+v1.8 (2013.08.05) / 2013080500
+------------------------------
+ - Updated Support Library to v18
+ - You can now set the app to force booking pickup time to be at least X minutes ahead
+ - Pickup time validation is now part of booking confirmation dialog
+ - Registration form may now require accepting Terms and Services prior proceeding 
+ - Added app version number to menu pane and main login screen (tap cab office logo 5 times to unveil it)
+ - Added support for source code signature
+ - Updated Polish translation
+ - Updated Spanish translation
+ - Updated Swedish translation
+ - Updated Italian translation
+
+
 v1.7 (2013.07.24)
 -----------------------------
  - Added Brazilian Portugese translation

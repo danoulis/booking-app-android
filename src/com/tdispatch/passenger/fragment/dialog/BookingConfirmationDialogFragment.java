@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
@@ -50,9 +51,6 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 	{
 		public void bookingConfirmed(LocationData pickup, LocationData dropoff, Long pickupMillis);
 	}
-
-
-
 
 
 	public static final int DIALOG_TYPE_OK 		= 0;
@@ -96,6 +94,21 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 		Bundle args = getArguments();
 		mPickup = args.getParcelable(KEY_PICKUP);
 		mDropoff = args.getParcelable(KEY_DROPOFF);
+
+
+		int shortestPickupTime = getResources().getInteger(R.integer.caboffice_minimum_allowed_pickup_time_offset_in_minutes);
+		if( shortestPickupTime > 0 ) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis( c.getTimeInMillis() + (shortestPickupTime * (WebnetTools.MILLIS_PER_MINUTE)) );
+
+			mPickupYear = c.get(Calendar.YEAR);
+			mPickupMonth = c.get(Calendar.MONTH);
+			mPickupDay = c.get(Calendar.DAY_OF_MONTH);
+
+			mPickupHour = c.get(Calendar.HOUR_OF_DAY);
+			mPickupMinute = c.get(Calendar.MINUTE);
+		}
+
 	}
 
 	@Override
@@ -152,19 +165,10 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 				break;
 
 				case R.id.button_ok: {
-					Long pickupMillis = null;
-
-					if( (mPickupHour == 0) && (mPickupMinute == 0) &&
-						(mPickupYear == 0) && (mPickupMonth == 0) && (mPickupDay == 0) ) {
-						pickupMillis = null;
-					} else {
-						Calendar c = Calendar.getInstance();
-						c.set(mPickupYear, mPickupMonth, mPickupDay, mPickupHour, mPickupMinute );
-						pickupMillis = c.getTimeInMillis();
+					if( validatePickupTimeAndShowMessage() ){
+						mHostFragment.bookingConfirmed(mPickup, mDropoff, getPickupTimeMillis());
+						dismiss();
 					}
-
-					mHostFragment.bookingConfirmed(mPickup, mDropoff, pickupMillis);
-					dismiss();
 				}
 				break;
 
@@ -176,6 +180,90 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 		}
 	};
 
+
+
+	protected Long getPickupTimeMillis() {
+		Long pickupMillis;
+
+		if( (mPickupHour == 0) && (mPickupMinute == 0) &&
+				(mPickupYear == 0) && (mPickupMonth == 0) && (mPickupDay == 0) ) {
+				pickupMillis = null;
+			} else {
+				Calendar c = Calendar.getInstance();
+				c.set(mPickupYear, mPickupMonth, mPickupDay, mPickupHour, mPickupMinute );
+				pickupMillis = c.getTimeInMillis();
+			}
+
+		return pickupMillis;
+	}
+
+
+	protected Boolean validatePickupTimeAndShowMessage() {
+
+		Long pickupMillis = getPickupTimeMillis();
+
+		Boolean result = true;
+
+		if( result ) {
+			int maxDaysAhead = getResources().getInteger(R.integer.caboffice_settings_new_bookings_max_days_ahead);
+
+			String pickupMillisBody = "";
+
+			if( pickupMillis != null ) {
+				Long diff = (pickupMillis - System.currentTimeMillis());
+
+				if( diff > 0 ) {
+					if( diff > (WebnetTools.MILLIS_PER_MINUTE * 5) ) {
+						if( diff > (WebnetTools.MILLIS_PER_DAY * maxDaysAhead) ) {
+							pickupMillisBody = getString(R.string.new_booking_pickup_date_too_ahead_body_fmt, maxDaysAhead);
+							result = false;
+						}
+					}
+				} else {
+					pickupMillisBody = getString(R.string.new_booking_pickup_date_already_passed);
+					result = false;
+				}
+
+				if (!result ) {
+					showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title), pickupMillisBody );
+				}
+			}
+		}
+
+
+		if( result ) {
+			int shortestPickupTimeOffset = getResources().getInteger(R.integer.caboffice_minimum_allowed_pickup_time_offset_in_minutes);
+
+			if( (mPickupHour == 0) && (mPickupMinute == 0) &&
+				(mPickupYear == 0) && (mPickupMonth == 0) && (mPickupDay == 0) ) {
+				pickupMillis = null;
+			} else {
+				Calendar c = Calendar.getInstance();
+				c.set(mPickupYear, mPickupMonth, mPickupDay, mPickupHour, mPickupMinute );
+				pickupMillis = c.getTimeInMillis();
+			}
+
+			Boolean pickupTimeTooEarly = false;
+			if( shortestPickupTimeOffset > 0 ) {
+				if( pickupMillis != null ) {
+					if( (pickupMillis - System.currentTimeMillis()) < (shortestPickupTimeOffset*WebnetTools.MILLIS_PER_MINUTE) ) {
+						pickupTimeTooEarly = true;
+					}
+				}
+			}
+
+
+			if( pickupTimeTooEarly ) {
+				String tooEarly = getString(R.string.new_booking_pickup_date_too_early_fmt, shortestPickupTimeOffset);
+				showDialog( GenericDialogFragment.DIALOG_TYPE_ERROR, getString(R.string.dialog_error_title), tooEarly );
+
+				result = false;
+			}
+		}
+
+
+		return result;
+	}
 
 
 	protected void updateDisplay() {
@@ -208,13 +296,6 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 	protected int mPickupHour = 0;
 	protected int mPickupMinute = 0;
-	protected void initPickupTimeOnce() {
-		if( (mPickupHour == 0) && (mPickupMinute == 0) ) {
-			Calendar c = Calendar.getInstance();
-			mPickupHour = c.get(Calendar.HOUR_OF_DAY);
-			mPickupMinute = c.get(Calendar.MINUTE);
-		}
-	}
 
 	public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
 	{
@@ -253,6 +334,8 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 
 		initPickupDateOnce();
 		updateDisplay();
+
+		validatePickupTimeAndShowMessage();
 	}
 
 
@@ -305,8 +388,9 @@ public class BookingConfirmationDialogFragment extends TDDialogFragment
 		mPickupMonth = month;
 		mPickupDay = day;
 
-		initPickupTimeOnce();
 		updateDisplay();
+
+		validatePickupTimeAndShowMessage();
 	}
 
 

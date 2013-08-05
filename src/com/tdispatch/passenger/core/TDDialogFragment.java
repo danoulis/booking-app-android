@@ -1,7 +1,9 @@
 package com.tdispatch.passenger.core;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.tdispatch.passenger.R;
+import com.tdispatch.passenger.fragment.dialog.GenericDialogFragment;
 import com.webnetmobile.tools.WebnetTools;
 
 /*
@@ -38,10 +41,22 @@ import com.webnetmobile.tools.WebnetTools;
 abstract public class TDDialogFragment extends DialogFragment
 {
 	protected View mFragmentView;
+	protected TDActivity mParentActivity;
+	protected static TDDialogFragment mMe;
 
 	protected int getLayoutId() {
 		throw new InternalError("LayoutId have to be specified");
 	}
+
+
+	@Override
+	public void onAttach( Activity activity ) {
+		super.onAttach(activity);
+
+		mMe = this;
+		mParentActivity = (TDActivity)activity;
+	}
+
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -90,6 +105,25 @@ abstract public class TDDialogFragment extends DialogFragment
 
 	protected void setCustomFonts( ViewGroup viewGroup ) {
 		WebnetTools.setCustomFonts(TDApplication.getAppContext(), viewGroup);
+	}
+
+
+
+	/**[ dialog helpers ]********************************************************************************************/
+
+	protected void showDialog( int type, int titleId, int messageId ) {
+		showDialog( type, getString(titleId), getString(messageId));
+	}
+	protected void showDialog( int type, int titleId, int messageId, int buttonId ) {
+		showDialog( type, getString(titleId), getString(messageId), getString(buttonId));
+	}
+	protected void showDialog( int type, String title, String message ) {
+		showDialog(type, title, message, null);
+	}
+	protected void showDialog( int type, String title, String message, String button ) {
+		GenericDialogFragment frag = GenericDialogFragment.newInstance( type, title, message );
+		frag.setTargetFragment(mMe, 0);
+		frag.show(((FragmentActivity)mParentActivity).getSupportFragmentManager(), "genericdialog");
 	}
 
 

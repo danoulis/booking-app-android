@@ -3,9 +3,12 @@ package com.tdispatch.passenger.fragment;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.tdispatch.passenger.R;
@@ -19,6 +22,7 @@ import com.tdispatch.passenger.host.RegisterHostInterface;
 import com.tdispatch.passenger.model.AccountData;
 import com.tdispatch.passenger.model.OfficeData;
 import com.webnetmobile.tools.JsonTools;
+import com.webnetmobile.tools.WebnetLog;
 import com.webnetmobile.tools.WebnetTools;
 
 /*
@@ -47,6 +51,7 @@ import com.webnetmobile.tools.WebnetTools;
 public class RegisterFragment extends TDFragment
 {
 	protected Handler mHandler = new Handler();
+	protected Boolean mToSRequired = false;
 
 	@Override
 	protected int getLayoutId() {
@@ -69,7 +74,11 @@ public class RegisterFragment extends TDFragment
 	@Override
 	protected void onPostCreateView() {
 
-		int ids[] = { R.id.button_register };
+		mToSRequired = getResources().getBoolean(R.bool.caboffice_tos_must_accept_on_signup);
+
+		WebnetTools.setVisibility( mFragmentView, R.id.tos_container, mToSRequired ? View.VISIBLE : View.GONE );
+
+		int ids[] = { R.id.button_register, R.id.button_tos };
 
 		for( int id : ids ) {
 			View v = mFragmentView.findViewById( id );
@@ -83,6 +92,18 @@ public class RegisterFragment extends TDFragment
 		public void onClick( View v ) {
 
 			switch( v.getId() ) {
+
+				case R.id.button_tos: {
+					Intent intent = new Intent(	Intent.ACTION_VIEW );
+					intent.setData( Uri.parse( getResources().getString(R.string.caboffice_tos_url) ) );
+					intent.addFlags( Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET );
+					try {
+						startActivity( intent );
+					} catch ( Exception e ) {
+						WebnetLog.e("Failed to launch external application", e);
+					}
+				}
+				break;
 
 				case R.id.button_register: {
 
@@ -124,6 +145,12 @@ public class RegisterFragment extends TDFragment
 							if( password1.equals( password2) == false ) {
 								errorMsgId = R.string.register_form_dialog_error_password_verification;
 							}
+						}
+					}
+
+					if( (errorMsgId == 0) && (mToSRequired) ) {
+						if( ((CheckBox)mFragmentView.findViewById(R.id.cb_tos)).isChecked() == false ) {
+							errorMsgId = R.string.register_form_dialog_error_tos;
 						}
 					}
 

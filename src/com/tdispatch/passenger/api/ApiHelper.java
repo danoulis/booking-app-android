@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.tdispatch.passenger.common.Const;
 import com.tdispatch.passenger.core.TDApplication;
 import com.tdispatch.passenger.model.AccountData;
+import com.tdispatch.passenger.model.LocationData;
 import com.webnetmobile.tools.WebnetLog;
 
 /*
@@ -118,18 +119,18 @@ final public class ApiHelper extends ApiHelperCore
 	}
 
 	// fare calculation
-	public ApiResponse locationFare( LatLng from, LatLng to ) {
+	public ApiResponse locationFare( LocationData from, LocationData to ) {
 		ApiRequest req = new ApiRequest( Const.Api.LocationFare, TDApplication.getSessionManager().getAccessToken() );
 
 		try {
 			JSONObject pickup = new JSONObject();
-				pickup.put("lat", from.latitude);
-				pickup.put("lng", from.longitude);
+				pickup.put("lat", from.getLatitude());
+				pickup.put("lng", from.getLongitude());
 			req.addRequestParam("pickup_location", pickup);
 
 			JSONObject dropoff = new JSONObject();
-				dropoff.put("lat", to.latitude);
-				dropoff.put("lng", to.longitude);
+				dropoff.put("lat", to.getLatitude());
+				dropoff.put("lng", to.getLongitude());
 			req.addRequestParam("dropoff_location", dropoff);
 
 		} catch (Exception e) {

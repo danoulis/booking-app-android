@@ -31,6 +31,7 @@
     <color name="transparent">#00000000</color>
     <color name="dimmed">#88000000</color>
 
+    <color name="link_fg">#0099cc</color>
 
     <!-- theme colors - SAFE to change -->
     <color name="list_row_bg_normal">@color/transparent</color>
